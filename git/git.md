@@ -4,7 +4,6 @@ Die Git Notitzen beziehen sich auf das Handbuch für Git Kurz & Gut
 von O'Reilly und beziehen sich auf die einzelnen Seiten.
 Wichtige Kurzbefehle werde ich hier aus quasi als HOW 2 Abtippen.
 
-
 # Grundlegende Konzepte 
 Versionskontrolle muss sein, da es 2 Arten von Menschen gibt.
 A) Menschen die noch nicht vom Datenverlust betroffen wurden
@@ -94,5 +93,76 @@ Es werden 2 Schlüssel generiert. Privat und public. Ich muss jetzt nicht erwäh
 
 ## Die Gitignore
 Git hat ein Ignore Pattern, also dinge, die nicht vom Versionierungssystem betroffen werden sollen.
-Das
+Das ist vor allem nüzlich, wenn man sowas wie sensible Konfigurationsdaten hat oder gespeicherte dateien, cache usw.
+Gitignore kann folgende Dinge ignorieren:
+- Eine Datei .env
+- node_modules/ (einen ganzen Ordner)
+- *.log Alle Dateien mit pattern 
+- foo/* alles IN einem Ordner 
+Eine Datei die bereits eingechecked ist, aber von nun am ausgeschlossen werden soll, wird entfernt mit
+`git rm --cached [NAME UND PFAD DER DATEI]`
 
+
+## Allgemeine Tipps und Tricks
+><b>Tipp:</b> Wenn man sowieso mit dem System git hantiert 
+>und das sowieso in der Kommandozeile, lohnt es sich ab und zu mal git status einzugeben,
+>so kann man erfahren was gerade der stand des versionssystems ist.
+
+><b>Tipp:</b> Mit `git diff [NAME DER DATEI]` ist es möglich von einzelnen dateien die Änderungen im vergleich zum letzten Stand 
+>zu beobachten. Das ist wirklich nützlich wenn man seine Änderungen nochmal durchsehen will.
+
+Das Patchen mit Git kann auch automatisiert geschehen. Ich kann mittels `git add -p` stückweise alles hinzufügen, was
+ich für den code geschrieben habe. Das heißt ich kann bei jedem chunk code dann entscheiden, ob ich den haben will oder nicht.
+Was echt praktisch ist, wenn ich viele kleine Änderungen gemacht habe.
+
+Ich kann Dateien auch vom Staging wieder entfernen, sodass sie nicht comitted werden, wenn ich das nicht möchte.
+So kann ich zumindest eine weitere Hürde vor den Production Code stellen (dass kein Murks committed wird).
+Das geht mit `git reset [NAME DER DATEI]`
+
+## Branches
+In Git kann ich mit `git checkout -b [NAME/DES/BRANCHES]` einen branch erstellen.
+Mit `git branch -m [NEUER/NAME]` kann ich einen branch umbenennen. Und mit `git checkout [NAME/DES/BRANCH]`kann ich den aktuellen
+branch umbenennen. 
+
+## Merge
+Ein Merge ist die Operation die Arbeit, die ich in einer Abzweigung gemacht habe zu einem Anderen branch hinzuzufügen.
+Daher kommt auch der Mergekonflikt. Also wenn ich 2 unterschiedliche Versionsstände habe, muss ich klären, wann welcher code verwendet wird.
+Das gilt es absolut und unter allen Bedingungen zu vermeiden. Denn Mergekonflike und grade drastische Mergekonflike geschehen nur, wenn jemand 
+sich zu lange Zeit für einen Branch nimmt oder man nicht regelmäßig aktualisiert. 
+Ein Merge also zusammenschluss wird durchgeführt, indem ich auf den Branch welchsel, welcher die Änderungen erhalten soll.
+Dann wirke ich `git merge [NAME/DES/BRANCH]` und füge daruch die Änderungen hinzu.
+
+## Mergekonflikte
+Falls solche Mergekonflikte auftreten: und es kann und wird passieren ist es besonders wichtig nicht überschnell etwas zu entscheiden.
+Das beste was man da machen kann, ist es sich einen wirklich <b>VERNÜNFTIGEN</b> Merge editor zuzulegen, der 
+dir anzeigt, wie das Fertige File aussehen würde, wenn man die Aktuellen Änderungen durchführen würde. 
+Prinzipiell: Kann man fremde Änderungen durchwinken, eigene Änderungen durchwinken oder beides nehmen. 
+Jedes mal wird überprüft, ob denn der Code egal aus welcher Richtiung er kommt.
+
+## Rebase
+Wenn die Arbeit dann doch nochmal länger dauert und ich noch nicht fertig bin,
+aber trozdem aktualisieren muss, kann ich rebasen. Also dem Branch eine neue Abstammung geben.
+Das kann zu mergekonflikten führen, da die Anderen, welche in der Zeit änderungen getätigt haben,
+ja garnicht wissen, was ich an Änderungen habe. Damit ich ungestört weitermachen kann, integriere ich mit dem rebase
+einfach die Änderungen und packe meine Änderungen oben drauf. Das kann wenn die gleichen Dinge bearbeitet werden natürlich zu Mergekonflikten
+führen. Aber so kann ich auch mal Länger auf einem Ausgecheckten branch arbeiten (was es trotzdem zu vermeiden gilt).
+
+## Cherry Pick 
+mit `git cherry-pick --no-commit [HASH]`kann ich einzelne Änderungen von anderen Branches in mein Arbeitsverzeichnis 
+Integrieren. Wenn mir z.B einfällt Jaaaa damals da hatte ich da doch ne Klasse dafür. Die hab ich aber gelöscht weil X
+und wurde nicht mehr gebraucht weil Y die hole ich jetzt wieder ins Leben. Das ist da so der usecase für cherrypick.
+
+## Git stash
+Ich kann die aktuellen Änderungen mit `git stash` cachen. So kann ich sachen zwischendrin machen oder sonstiges.
+Kann hald einen Puffer aufbauen. und mit git stash apply kann ich die Änderungen wieder hinzufügen.
+Das habe ich häufig gemacht, wenn ich Änderungen von Außen integrieren möchte mit nem Rebase. Also
+erst ALLE Änderungen stashen, dann den rebase durchführen und dann haue ich meine Änderungen da wieder drauf und integriere meine
+Änderungen einfach in den Aktuellen Code. Das geht dann mit `git stash apply`
+
+## Wartung und Historie
+`git log` und `git reflog` sind 2 wertvolle waffen, um die Commithistorie nachvollziehen zu können.
+Ich persönlich finde es wichtig, dass die komplette Commit historie immer vollständig erhalten bleibt.
+So können später auch fuck ups wieder rekonstruiert werden und so kann auch nix verloren gehen :)
+
+Mit `git blame [NAME DER DATEI]` kann ich herausfinden, wer zuletzt an der aktuellen Datei
+dran war (suprise ich bins die meiste zeit selber).
