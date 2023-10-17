@@ -53,3 +53,47 @@ und man kann sich die Funktionalität nicht erschließen.
 >ein System, welches Abhängigkeiten, Intention klar kommuniziert (gerne mehr Zeilen, wenn Sie kein Sprachdurchfall sind),
 >ein System, welches gut Dokumentiert und _offensichtlich_ ist.
 
+## Ursachen für Komplexität
+Unter anderem kann man Abhängigkeiten als einer der Ursachen für Komplexität zählen.
+Ganz vermeiden lassen sie sich nicht, aber ausdünnen. In der Regel hat man 2 Seiten der Abhängigkeit.
+Einen Sender und einen Empfänger. Beispiel Webseite: Irgendwo muss eine Klasse definiert werden,
+die den Rotton für alle Webseiten beinhaltet und sie per api zur vfg stellt.
+Man kann den Compiler und das Typensystem dazu nutzen, solche Abhängigkeiten über das Typensystem zu vermerken.
+
+Ein weiterer Grund kann unklarheit sein. Unklarheit im Sinne von Ausdruck.
+In der Regel ensteht unklarheit dadurch, dass die Intention des Authors nicht
+ausreichend kommuniziert wird und durch mangelnde Dokumentation.
+Dokumentation ist allerdings nur der Nötige Füllwert.
+
+Stellen wir uns also eine Flasche vor. Diese Flasche muss am Ende des Tages gefüllt sein.
+Wenn wir eine gute Architektur haben, ist die Flasche gut mit wasser gefüllt. Der Rest wird gefüllt durch
+Dokumentation. Wenn wir ein unklares und komplexes System haben, bekommen wir weniger wasser und der aufgefüllte Dokumentationsanteil
+wird größer. 
+
+Komplexität ist kein Feind, der einmal bekämpft werden muss und dann besiegt ist.
+Komplexität muss jeden Tag aufs neue bekämpft werden. Jede Designentscheidung muss dazu beitragen, das
+System ein kleines Stückchen einfacher zu machen.
+
+## Strategische und Taktische Programmierung (Makro vs Mikro)
+Taktische Programmierung ist eine kurzfristig gesehene Planung. Ofmals wird in Unternehmen taktisch Programmiert,
+um schnell von einem Feature zum nächsten zu kommen und damit wird keine Zeit für Designentscheidungen und dem
+Bekämpfen der komplexität gewidmet. Die taktische Programmierung zeichnet sich aus als der kürzeste Weg
+zu einem momentanen Erfolg. In jedem Team gibt es mindestens eine Person, die taktisch Programmiert.
+Diese werden natürlich von den Leuten gefeiert, die bspw. in PO Position sitzen, hinterlassen aber meistens
+eine Schneise der Verwüstung.
+
+Bei der Stategischen Programmierung ist es (neben den funktionalen Anforderungen) eine gute Architektur und einen guten Lösungsweg zu finden,
+der simpel und verständlich ist. (also gut Wartbar). Wie in dem Talk von Robert Martin wissen wir ja,
+dass wenn man länger an einem Projekt sitzt und man nur die ganze Zeit taktisch programmiert, dass dann die Produktivität abnimmt.
+Und genau das verhindert die Startegische Programmierung. 
+
+Bei der strategischen Programmierung geht es (wir wissen, dass alle wege nach rom führen), um Optionen. 
+Es gibt immer mehrere Wege etwas zu tun aber welcher ist tatsächlich auch der nachhaltigste?
+Damit wir allerdings die Produktivität nicht vernachlässigen wäre eine Spanne von etwa 20% angemessen.
+Also von 8 Stunden Arbeit - 1,5 Stunden. Es geht nicht darum jeden Tag eine Bärenladung zu schaffen, sondern
+einfach darum jeden Tag ein bisschen zu machen. (Natürlich gibt es größere Brocken und kleinere Brocken - das ganze muss nochmal weiter aufgeteilt werden. Aber wann lohnt sich das alles? Kurzum: Wenn ich vor habe das Projekt langfristig zu betreuen.
+
+## Von der Wahrheit
+Wir wissen: wenn wir einmal anfangen mit dem Kurs "taktisch", muss die Umkehr vom Kurs genau berechnet werden.
+Wie viel kostet es alles neu zu schreiben vs wie viel kostet das aufräumen vs wie viel kostet es, alles zu lassen wie es ist?
+
