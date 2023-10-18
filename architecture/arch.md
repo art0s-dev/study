@@ -97,3 +97,36 @@ einfach darum jeden Tag ein bisschen zu machen. (Natürlich gibt es größere Br
 Wir wissen: wenn wir einmal anfangen mit dem Kurs "taktisch", muss die Umkehr vom Kurs genau berechnet werden.
 Wie viel kostet es alles neu zu schreiben vs wie viel kostet das aufräumen vs wie viel kostet es, alles zu lassen wie es ist?
 
+Aber: taktisch geht schneller; erzeugt aber technische Schuld. Facebook hat das z.B gemacht. Zwar befähigt das Leute 
+ungemein und die Lernkurve wird auch eine immer bessere, aber selbst FB haben hinterher ihr Motto geändert.
+Eine starke technische Kultur, die Lösungsorientiert arbeitet ist der Schlüssel zum langfristigen Erfolg.
+
+## Modulares Design
+Das beste was passieren kann, ist das Module vollkommen losgelöst voneinander bearbeitet werden können.
+Somit würde die Software nur so komplex sein, wie das schlimmste Modul. Ist leider nur unrealisitisch.
+Module MÜSSEN zusammenarbeiten. Also ist es das Ziel die Abhängigkeiten zwischen Modulen zu verringern.
+Jedes Modul besteht aus Interface und Implementierung. Hier gilt das Eisbergprinzip. Kleine Spitze ist
+das Interface und der eigentliche Eisberg ist die Implementierung. Das soll es einfach machen, damit zu arbeiten.
+Klassen können in objektorientierten Sprachen als Module eingesetzt werden.
+
+Jede Schnittstelle hat 2 Arten von Informationen. Formelle und informelle.
+Formelle sind Übergabewerte und Rückgabeparameter. Informelle sind sowas wie spracheneigenes Verhalten.
+Also Dinge, die erstmal garnicht so offensichtlich sind. Es wäre also logisch alle Informationen 
+zur Entwicklung mit Methode X in die Schnittstelle zu legen. Dazu eignen sich z.B ja Interfaces.
+Da lese ich keine Implementierung, sondern habe nur eine High-level übersicht, was das eigentlich macht.
+
+## Abstraktionen
+Abstraktionen sind vereinfachte Darstellungen einer Idee.
+Jedes Modul sollte eine Schnittstelle in Form einer Abstraktion bereitstellen. Je mehr unwichtiger Krams weggelassen wird,
+desto besser ist die Abstraktion.Eine Abstraktion die wichtige Informationen weglässt oder unwichtige Informationen beinhaltet
+ist grundsätzlich fehlerhaft. Jedes mal, wenn ich etwas tun kann, ohne zu verstehen was unter der Haube ist,
+hat die Abstraktion mir Zeit erspart. 
+
+## Natur der Module
+Es gibt Tiefe und Flache Module. Fangen wir einfach mit den tiefen Modulen an.
+Ein "tiefes" Modul hat viel viel viel Funktionalität inne, bieter aber zugleich eine minimale Schnittstelle mit nur wenigen
+Methoden. So ist es einfach das ganze zu begreifen. Wir bevorzugen immer Tiefe Module.
+Als beispiel wird die IO Schnittstelle von Unix angeführt. Die benutzten functions sind open, close, read, write, lseek.
+5 Methoden für massive Funktionalität - hier wieder: das Eisbergprinzip.
+
+
