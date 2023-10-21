@@ -129,4 +129,54 @@ Methoden. So ist es einfach das ganze zu begreifen. Wir bevorzugen immer Tiefe M
 Als beispiel wird die IO Schnittstelle von Unix angeführt. Die benutzten functions sind open, close, read, write, lseek.
 5 Methoden für massive Funktionalität - hier wieder: das Eisbergprinzip.
 
+Ein weiteres Beispiel für gute Modularisierung ist z.B die GC in Java. Die braucht garkeine Schnittstelle und arbeitet im Hintergrund.
+Flache Module sind Module, die viel Schnittstelle bieten und wenig Implementierung dahinter. Sie sind nicht immer vermeidbar,
+jedoch sind sie ein Warnzeichen für Komplexität.
+
+Der Author erwähnt hier noch in einem Abschnitt, dass Ideen wie Klassen dürfen nicht länger als X sein
+oder eine Methode darf nur 6 Zeilen haben für unsinnig, da sie automatisch zu vielen kleinen flachen Klassen führe.
+Brian Will hat sowas als "lost surface" beschrieben, als sei der Code eines Moduls ein Marmorblock.
+Wenn ich den Marmorblock zerschlage splittert die Komplexität überall hin.
+
+Als negativbeispiel wird die Java I/O genannt. Es müssen unsinnige buffered Objects erstellt werden, um schreiben und
+lesen zu können. Da lässt der Author die Gegenthese Fallen
+<b>Schnittstellen sollten so designed sein, dass sie den häufigsten Fall abdecken</b>
+
+## Information Hiding
+Es ist das Ziel eines Moduls die Internen Informationen der Implementierung und
+die damit einhergehende Komplexität um jeden preis nach außen zu verbergen. Datenstrukturen sollten auch möglichst versteckt sein.
+Wenn ein Modul keine Abhängigkeiten in der Schnittstelle kommuniziert, sollten keine Abhängigkeiten existieren - noch nicht mal Implizite.
+Selbst wenn ich über getter und Settter eine Schnittstelle zur verfügung stelle, sind darudch private methoden und attribute 
+immernoch sichtbar. Es wäre also logisch für die Sachen die ich verstecken will <b>KEINE</b> getter und setter anzulegen.
+
+Es wäre ja eine gute Überlegung, dass wenn ich eine Datenstruktur nach außen Zeige, dass ich dann eine dedizierte simple methode zur Verfügung stelle,
+damit von außen damit ohne Bedenken gearbeitet werden kann.
+
+Das Gegenteil davon sind Informationslecks. Also wenn Informationen über Implementierung, generell das WIE nach außen bluten.
+Das gilt auch wenn ich das gleiche Wissen auf meherere Klassen aufteile. Wenn ich z.B die gleiche oder Ähnliche Business logik,
+die eigentlich zum gleichen Feature gehört in unterschiedlichen Klassen beschreibe, sollte ich mir überlegen das ganze vielleicht doch in
+einer übergeordneten Klasse zusammenzufassen. Auch wenn die Methode/Klasse dann länger wird.
+
+Module sollten also gebündelt werden und die Schnittstelle sollte so schmal wie möglich gehalten werden.
+Der Author stellt weiterhin heraus, dass zeitliche Dekomposition zu vermeiden ist. Also wenn ich z.B eine Methode habe:
+- tue dies 
+- lese das
+- werte das aus
+Dann wäre ich gut beraten, das ganze nicht in 3 unterschiedliche Klassen zu verpacken, vielleicht noch nicht mal unterschiedliche methoden
+(vielleicht eher methoden in der methode mit lambdas???? ), weil das die Schnittstelle gefährden kann und die Komplexität erhöht wird.
+Der elementare Satz lautet hierbei "Was muss ich wissen, um diese Aufgabe zu erledigen?" Selbst Methoden die zu einem Anderen Zeitpunkt ablaufen (crons) oder generelle Asynchrone implementierungen können dem Modul hinzugefügt werden.
+
+Das korelliert mit dem Single Responsibility Prinzip von Robert C Martin. Eine Klasse sollte nur eine Sache tun.
+Wenn ich z.B ein Modul habe, dass HTTP Server heißt (Beispiel ausm Buch) wäre ich gut beraten alles was mit HTTP zu tun hat 
+mit einer geschickten Schnittstelle alles in diese Klasse zu packen.
+Und nochmal es springt mich fast schon förmlich an: Bitte keine Datenstrukturen nach außen entblößen.
+Versuche eher Methoden zu schaffen mit der Datenstruktur zu arbeiten.
+
+Versuche ebenfalls so viele default Werte wie möglich zu treffen. Parameter, die man sich schenken kann,
+sind gute Parameter. Und weniger Informationen, die ich nach außen mitteilen muss. Ein Warnzeichen ist hier
+wenn ich von einer Schnittstelle gezwungen werde, mit anderen Methoden zu arbeiten ist die Schnittstelle nicht gut.
+
+Für Interne schnittstellen innerhalb einer Klasse: Wenn ich per getter mir die Abhängigkeiten eines Attributes ziehe
+und ganz nach oben in die Methode packe und es als Dependency injection verkaufe hab ich besonders hart gefailed.
+Weil dafür gibt es ja parameter und das ist implizite Konmplexität. Also: Stellen minimieren, wo ich auf instanzvariablen zugreife.
 
