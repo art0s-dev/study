@@ -217,4 +217,13 @@ der Anwendung generalistisch.
 Es ist ebenfalls möglich beides zu machen. Also Anwendungsregeln in einer generalisierten Klasse zu verfassen 
 und die Umsetzung der Regeln in einem Spezialsiertem Submodul vorzunehmen (wobei man da auch auf diese Klassizites achten muss.. weniger ist da mehr )
 
+## Verschiedene Schichten - Verschiedene Abstraktionen
+Software ist eine Zwiebel Aus Theken. Jede Schicht bedient sich an der unteren. Je weiter nach unten es geht, desto "low leveliger" sollte es werden.
+Also sollten sich die Oberen Schichten nicht mit Speicherkapazität oder Output Buffer befassen und die Unteren nicht Gui Logik - sollte eigentlich klar sein.
 
+Gutes Anzeichen für unnötige Komplexität sich pass-thru methoden also Methoden die einfach nur andere Methoden aufrufen. Das ist ja gut und schön eigentlich,
+nur wenn ich a) die methode nur an einer Stelle verwende kann ich sie auch ausschreiben und b) wenn die Methode Side effects hat, muss der nächste Entwickler anfagen das
+alles nachzuvollziehen. Außerdem sorgen diese Art der Methoden dafür, dass refactoring die Hölle wird.
+
+Das ganze lässt sich vermeiden, indem man die Methoden entweder direkt aufrufen kann oder den Callstack(wenn er nur einmal verwendet wird) hinter einer guten Api
+in einer Klassse eindampft.
