@@ -180,3 +180,41 @@ Für Interne schnittstellen innerhalb einer Klasse: Wenn ich per getter mir die 
 und ganz nach oben in die Methode packe und es als Dependency injection verkaufe hab ich besonders hart gefailed.
 Weil dafür gibt es ja parameter und das ist implizite Konmplexität. Also: Stellen minimieren, wo ich auf instanzvariablen zugreife.
 
+## Vielseitige Module
+Spezialisierung führt zu Komplexität. Generalisierung zu guten Abstraktionen. Wenn ich mit einer Codierung, die 80% aller Fälle abdeckt 
+arbeiten kann, ist sie gut. Eleminiere Sonderfälle durch die Schnittstelle und decke Randfälle möglichst automatisch ab.
+Spezifische Implementierung muss in der Wartung oftmals wieder aufgeschnitten werden und erweitert werden.
+
+Es gibt prinzipiell 2 Arten der Erweiterbarkeit und die zu unterscheiden braucht sehr sehr <b>sehr</b> viel Erfahrung. 
+Die eine Art ist ein Gedanke ähnlich wie "INSERT BELL IQ CURVE MEME HERE" _nooo du musst unbedingt hexagonale architektur verwenden ... bla bla _
+Das ist gefährlich und führt zu echten Overengenieering und das bringt nu wirklich keiner Sau was. Du wirst nicht fertig,
+das Design ist scheiße und kein Mensch weiß, was du eigentlich willst und deine Kollegen hassen dich.
+
+Die andere Art ist mehr so ein "ha, ich glaub der Kunde wird das sowieso ändern wollen" - Das ist oftmals der Gedanke, der dich 1,2 Functions mehr schreiben lässt.
+Aber: Wenn aus der Erfahrung heraus gehandelt wird, kommt der Kunde oftmals wirklich an und wird die Funktionalität ändern lassen wollen.
+Also bereitest du dich drauf vor, die Sachen etwas modularer anzugehen und dynamischer zu gestalten, damit du auf Änderungen der Anforderungen vorbereitet bist.
+(Und was ist der Prozess der Softwareentwicklung eigentlich außer ein großes sich Ändern der Anforderungen!?!?!)
+
+Erfahrungsgemäß ist generalisierter Code auch kürzer. Wenn ein Modul sich eher wie eine "Theke" verhält, ist es einfacher,
+sich daran zu bedienen / bedienen zu lassen, da klarer ist, was bereitgestellt wird, statt dass man selber suchen muss.
+Außerdem müssen so andere Entwickler nicht die ganzen edgecases lernen, sondern können stadtdessen mit einer angenehmen
+80% Lösung arbeiten, wo man sich keine Implementierungsdetails merken muss.
+
+>Die wichtigsten Fragen bei der Erschaffung generalisierter Schnittstellen lauten:
+> - _Wie sieht die <b>einfachste</b> Schnittstelle aus, die meine aktuellen Bedürfnisse abdeckt?_
+> - _In wie vielen Situationen wird diese Methode eingesetzt werden?_ 
+> - _Kann man die Schnittstelle einfach verwenden?_
+
+## Spezialisiserung nach Oben oder nach unten schieben
+Spezialisierung ist in Softwaresystemen nicht vermeidbar. Oftmals zahlt der Kunde für spezialisierte Features.
+Da habe ich prinzipiell 2 Optionen das ganze anzugehen. Ich gehe immer davon aus, dass die Anwendung einen generalisierten Kern hat.
+Dieser Kern bietet eine einfache Schnittstelle für z.B das Gui. Wenn ich eine spezialisierte Lösung implementieren soll, muss ich schauen was besser passt:
+ist das Feature Low level und der nächste Entwickler soll sich nicht mit Implementierungsdetails herumschlagen kann ich
+den spezialsierten Code _nach unten schieben_ und unter der Abstraktion des Moduls den code verstecken.
+Oder ich _schiebe den code nach oben_ und beschreibe z.B im Gui(oder in einer anderen Klasse..) das Feature und lasse den Kern
+der Anwendung generalistisch.
+
+Es ist ebenfalls möglich beides zu machen. Also Anwendungsregeln in einer generalisierten Klasse zu verfassen 
+und die Umsetzung der Regeln in einem Spezialsiertem Submodul vorzunehmen (wobei man da auch auf diese Klassizites achten muss.. weniger ist da mehr )
+
+
