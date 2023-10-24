@@ -162,6 +162,7 @@ Der Author stellt weiterhin heraus, dass zeitliche Dekomposition zu vermeiden is
 - tue dies 
 - lese das
 - werte das aus
+
 Dann wäre ich gut beraten, das ganze nicht in 3 unterschiedliche Klassen zu verpacken, vielleicht noch nicht mal unterschiedliche methoden
 (vielleicht eher methoden in der methode mit lambdas???? ), weil das die Schnittstelle gefährden kann und die Komplexität erhöht wird.
 Der elementare Satz lautet hierbei "Was muss ich wissen, um diese Aufgabe zu erledigen?" Selbst Methoden die zu einem Anderen Zeitpunkt ablaufen (crons) oder generelle Asynchrone implementierungen können dem Modul hinzugefügt werden.
@@ -227,3 +228,44 @@ alles nachzuvollziehen. Außerdem sorgen diese Art der Methoden dafür, dass ref
 
 Das ganze lässt sich vermeiden, indem man die Methoden entweder direkt aufrufen kann oder den Callstack(wenn er nur einmal verwendet wird) hinter einer guten Api
 in einer Klassse eindampft.
+
+## Wann ist es OK dopplungen zu haben?
+Bei Dispatchern ist das grundsätzlich erstmal OK. Ein dispatcher ist eine Methode, die als "controller" andere Methoden aufruft und Argumente weitergibt.
+Dieser stellt im Gegensatz zu Pass thru methoden eigene Funktionalität zur Verfügung.
+Ein Dispatcher wird z.B bei der Implementierung einer Api oftmals genutzt, um die unterschiedlichen HTTP Methoden anzusteuern.
+
+Bei den Decorator Pattern ebenfalls. Das ist aber mehr so ein "it depends". Das Decorator Pattern ist ein Objekt, welches ein Objekt beinhaltet 
+und on top eigene Funktionalität draufschlägt und dann die getter und setter des darunterliegenden Objekts nutzt. Das ist OK. Dabei sollte man
+sich allerdings fragen:
+- Wäre es nicht Sinnvoll diesen Fall in die darunterliegende Klasse einzubauen, um weiter zu generalisieren?
+- Wird die Klasse für einen Speziellen Fall benötigt? Ist es nicht Sinniger das ganze eine Schicht höher z.B ins Gui zu ziehen?
+- Könnte man einen bereits bestehenden Decorator Nutzen?
+- Muss es als decorator laufen oder kann es auch als einzelne Komponentenklasse implementiert werden?
+
+## Pass Thru Variablen
+Wenn ein größeres System gewarter wird, neigt man oftmals dazu einfach die Parameterliste einer Methode zu erweitern
+und dann dort die benötigte Funktionalität einzufädeln. Das bitte nicht tun, sondern mögliche einfachere alternativen zum Umgang 
+mit Objekten nutzen. Ist ein DTO für die Parameter Sinnvoll? So haben wir nur einen Parameter, können die Liste verlängern
+und das Feld, was wir hinzufügen möchten komplett Optional machen. Wird zwar nicht gerne gesehen aber es ist auch möglich
+das gewünschte Feld als Globale Variable (scoped innerhalb der muttermethode) zur verfügung zu stellen.
+
+## Komplexität nach unten ziehen
+> Einfache Schnittstelle > einfache Implementierung. 
+> Entweder ist die Komplexität in der Sprache oder in der Anwendung.
+
+Alles was ich durch die Schnittstelle nach außen Kommuniziere, muss sich ein anderer in den Schädel hämmern.
+Je Intuitiver ich die Schnittstelle gestalte, desto besser. Es ist möglich die Anwendung der Schnittstelle weiter zu verfeinern durch
+Konfigurationsparameter. Allerdings führt jeder Parameter auch dazu, dass sich jemand den Mist merken muss.
+Also wäre Ideal jeden Edgecase durch Konfigurationsparameter Abzufangen und einen Standartwert zu schaffen.
+Also für den Fall, dass es doch jemand konfigurieren und verändern möchte (man es sich aber nicht merken muss (80 - 20 regel))
+
+## Zusammen oder getrennt?
+Es gibt 2 Worstcase Szenarien. 1) Die Gesamte Software befindet sich in einer Klasse. 2) Die Gesamte Software befindet sich in 627.844 Klassen
+Wir merken also Komplexität steigt in der Implementierung mit der Tiefe der Klasse (wenige Klassen - kleine schnittstellen) und die Komplexität
+steigt in der Anzahl der Schnittstellen. (Wilde Getter Setter, Pass thru methoden) Ebenfalls macht das Aufteilen einer Methode die Methode schwerer Lesbar.
+Wenn ich eine Methode hab, die z.B in 5 kleinere Methoden unterteilt werden kann, sollte ich (wenn sie nur einmal verwendet werden) die methoden
+möglichst beieinander lassen. Also nicht einen 50 Zeiler in 5 Klassen verteilen, nur damit es mehr nach "clean code" aussieht.
+
+Also wäre es ja Sinnig Codeelemente zu gruppieren nach Zugehörigkeit. Wenn also gleiche Informationen genutzt werden sollen, 
+oder die Schnittstelle sowieso sehr ähnlich ist, macht es ja durchaus sinn den Code zusammenzufassen. 
+
