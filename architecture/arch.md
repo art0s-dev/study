@@ -268,4 +268,28 @@ möglichst beieinander lassen. Also nicht einen 50 Zeiler in 5 Klassen verteilen
 
 Also wäre es ja Sinnig Codeelemente zu gruppieren nach Zugehörigkeit. Wenn also gleiche Informationen genutzt werden sollen, 
 oder die Schnittstelle sowieso sehr ähnlich ist, macht es ja durchaus sinn den Code zusammenzufassen. 
+Also Zusammenfassen, was zusammgengehört. Wenn Teile der Lösung in verschiedenen Klassen implementiert sind, 
+ist es doch erstmal eine gute Idee das ganze zusammenzubringen, damit weniger Oberfläche und damit weniger Schnittstellen vorhanden sind.
+Ebenfalls kann ich so wiederholungen vermeiden.
+
+> Wenn ich mehrmals hintereinander den gleichen (oder sehr ähnlichen code) vorfinde
+> habe ich noch nicht die richtige Abstraktion gefunden
+
+Code der allgemein und vielfältig verwendbar ist und z.B Kontrollmechanismen enthält, sollte möglichst
+von spezialisiertem Code (dem edgecase, der implementierung für x, den bugfix für y) getrennt sein.
+Denn wenn ich beides zusammen lasse und wenn ich den allgemeinen code warten muss, muss ich jedes mall oder muss jeder der den code anfässt,
+das ganze Gerüst verstehen. Das ist ja nicht Sinn der Sache. 
+
+Doch wo verläuft da die Grenze? Nehmen wir mal das Beispiel, dass wir eine lange Methode behandeln wollen.
+Sowas wie in meinem aktuellen Projekt Hexenhammer die Schadenskalkulation. Es ist im Prinzip eine Sequenz die behandelt wird,
+welche zu einem Endergebnis führt. Also sollte diese Methode zusammen bleiben. Wenn ich allerdings darin Subroutinen sehe,
+welche ich problemlos losgliedern kann (also auch durchs threading jagen kann), sollte ich diese ausgliedern.
+Wenn die Methode allerdings zu viel auf einmal regelt (und zu viele Überraschungen parat hält, sowas wie side efects),
+dann steigt die Komplexität und ich könnte passende Teile ausgliedern.
+
+Das heißt es würde keinen Sinn machen, wenn eine Methode einfach zu behalten ist und einfach zu lesen ist, diese in
+unterschiedliche Methoden zu verfrachten. Das würde A) die Oberfläche der Schnittstellen erhöhen und B) hat es das potential die Implementierung
+noch komplexer zu machen. Also ist Methodenlänge kein Kriterium, sondern Komplexität.
+ABER: Sagen wir ich habe 3 untermethoden. Wenn ich 2 und 3 nur verstehen kann, wenn ich 1 gelesen habe, sollte ich sie zusammenlassen.
+
 
