@@ -292,4 +292,67 @@ unterschiedliche Methoden zu verfrachten. Das würde A) die Oberfläche der Schn
 noch komplexer zu machen. Also ist Methodenlänge kein Kriterium, sondern Komplexität.
 ABER: Sagen wir ich habe 3 untermethoden. Wenn ich 2 und 3 nur verstehen kann, wenn ich 1 gelesen habe, sollte ich sie zusammenlassen.
 
+<b>Jede Methode sollte eine Sache tun, diese aber vollständig</b>
+Eine Idee wäre es nur Sachen auszulagern, die für Multithreading oder asynchrone Abläufe gebraucht werden. 
+Der Meiste Code mit Multithreading sollte sowieso so gestrickt sein, dass ich feste variablen übergebe und 
+der multithreading code so gut es geht keine Nebeneffekte beinhaltet.
+
+## Ousterhout über clean code
+Er stellt sich eher die Frage bei Uncle Bobs Regel, wie lang eine Function sein sollte, ob es Nützlich ist eine große Funktion zu haben oder viele kleine.
+Er ist dabei der Meinung, dass mehr Schnittstellen(also mehr Methoden) auch zu mehr Komplexität führen, da mehr Schnittstellen überwacht und erlernt werden müssen.
+
+## Die Existenz von Fehlern wegdefinieren
+Oder: Wie wir Exceptions so verwenden können, dass Sie die Komplexität unserer Anwendung nicht erhöhen.
+Exceptions sind per definition etwas, was nicht sein sollte. Sagen wir wir schreiben eine Datei. Das geht nicht weil Festplatte voll, zack Exception.
+Exceptions erhöhen die Komplexität der Anwendung, weil sie den "normalen" Ablauf stören.
+Grad in Java wird man als Programmierer dazu verpflichtet diese Ausnahmefälle zu behandeln. Prinzipiell gibt es 2 Wege wie man mit solchen Exceptions umgeht:
+1) Man versucht den "Kaputten" Zustand zu bereinigen oder man versucht es nochmal (notfallplan umsetzen)
+	- John erwähnt anbei, dass der so operierende Code auch exceptions wirft, was zusätzliche Komplexität bedeutet.
+2) Man gibt den Fehler nach Oben an den Nutzer oder an weitere Module zurück (fliegen lassen)
+
+><b>Code der nicht ausgeführt wurde, funktioniert nicht!</b>
+>Also sparsam sein, mit Code zur vermeintlichen Fehlerbereinigung, da es hierbei oft zu vollkatastophen kommen kann
+
+Die von einer Klasse geworfenen Exceptions sind Teil der Schnittstelle. Das heißt jede Exception erhöht die Komplexität meiner Schnittstelle.
+Das heißt ich muss mir im Modul selber im besten Fall Gedanken machen, wie ich mit den aufkommenden Exceptions umgehen kann.
+Der Autor stellt dafür 4 Techniken vor:
+
+### Die Existenz selbst wegdefinieren
+Also innerhalb des Moduls selbst das Problem lösen, sodass ich mich von außen nicht damit rumschlagen muss.
+Als Beispiel wird das Datei löschen in Windows vs Linux angeführt. Bei Windows ist es nicht möglich eine Datei zu löschen, während sie verwendet wird.
+Bei unixsystemen wird allerdings ein asynchroner prozess gerufen, der einen Buffer der Datei erstellt, sodass alle Prozesse, die aktuell darauf zugreifen noch
+drauf zugreifen können. Für alle anderen gilt die Datei allerdings als gelöscht. Das Ergebnis ist, dass der Nutzer hier weniger entscheiden muss, sondern einfach
+Löschen kann. Das reduziert den overhead.
+
+Als weiteres Beispiel wird hier die Java Substring methode genannt. Die wirft eine Exception, wenn der Index nicht innerhalb des Strings verfügbar ist.
+Also sagen wir ich hab ein "wort".substring(0,4) (mit indexzählung wären das 4 Buchstaben 0,1,2,3) Die 4 würde eine Exception verursachen.
+Es wäre also einfacher ein leeres Ergebnis zurückzugeben, wenn sich der Index nicht im String befindet.
+
+<b>Insgesamt reduziert man die Fehler einer Software, indem man sie EINFACHER!!!!! macht</b>
+
+>Info: Ein Exception handler ist ein Stück code, welcher ausgeführt wird, wenn es zum Notfall kommt.
+>Merke: Ein robustes System hat Pläne für solche Notfälle. (Sollte aber nicht zugekleistert werden mit defensiver Programmierung)
+>Ich will ja immernoch den "normal case" ausdrücken können. 
+
+### Exceptions maskieren
+Das Maskieren von Exceptions ist sehr ähnlich, jedoch findet man hier als Beispiel asynchrone hintergrundprozesse.
+Also wenn z.B in einer Anwendung die Konnektivität verloren geht, wäre es durchaus sinnvoll, den Fehler zu maskieren (keine Exception)
+und solange zu warten, bis die Konnektivität wieder hergestellt ist. Das gleicht am ehesten dem Notfallplan, den ich oben erwähnt habe.
+Das Funktioniert zwar nicht immer, aber ist durchaus möglich. Der Code sollte natürlich so gehalten werden, dass er keine weiteren Exceptions verursacht.
+Also hier keine Experimente und was an den Datenstrukturen rumfuchteln, sondern einfach Warten und vllt nochmal versuchen.
+
+<b>Wichtig</b>: Der Code zur Fehlerbehandlung wäre als eigene Exception angemessen und sollte von den anderen Exceptions klar getrennt sein.
+Also vllt auch visuell hervorgehoben.
+
+### Aggregieren von Exceptions
+Also damit ist das Zusammenführen von Exceptions gemeint. Oder auch Bündeln. Wenn ich z.B eine Methode verwende, die eine Exception werfen kann, würde es ja Sinn machen
+die Methode an nur einer Stelle zu rufen, das Ergebnis wegzuspeichern und dort einmal alle Exceptionhandler zu definieren. So müssen sich
+die anderen Module mit den Exceptions nicht auch noch rumschlagen.
+
+
+
+
+
+
+
 
