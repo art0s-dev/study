@@ -346,13 +346,65 @@ Also vllt auch visuell hervorgehoben.
 
 ### Aggregieren von Exceptions
 Also damit ist das Zusammenführen von Exceptions gemeint. Oder auch Bündeln. Wenn ich z.B eine Methode verwende, die eine Exception werfen kann, würde es ja Sinn machen
-die Methode an nur einer Stelle zu rufen, das Ergebnis wegzuspeichern und dort einmal alle Exceptionhandler zu definieren. So müssen sich
-die anderen Module mit den Exceptions nicht auch noch rumschlagen.
+die Methode an nur einer Stelle zu rufen, das Ergebnis wegzuspeichern und dort einmal alle Exceptionhandler zu definieren. So müssen sich die anderen Module mit den Exceptions nicht auch noch rumschlagen.
+An der Stelle wird also vorgeschlagen einen generalisierten Weg der Fehlerbehandlung zu gehen.
+Also sagen wir mal wir haben ein Backup System aus mehreren Maschinen. Wenn eine Maschine ausfällt wegen
+Fehler X sollte doch eher der Weg der Fehlerbehandlung sein: Egal was der Fehler ist,
+starte eine weitere Virtuelle Maschine und binde Sie in z.B den Raid mit ein.
+Dadurch habe ich einen gebündelten Weg der Fehlerbehebung unabhängig davon, was der Fehler ist.
 
+### Einfach Crashen Lassen
+In jeder Anwendung gibt es Fehler, die sich nicht lohnen sie zu fangen. Zum Bleistift wären das Out of Memory
+Exceptions. Wenn es ein seltener Fall ist, der sehr unwahrscheinlich ist, würde es die Anwendung nur noch
+komplexe machen, sich auch auf den Fall vorzubereiten. Vor allen Dingen, wenn der grade bearbeitete Workflow nicht Systemkritisch ist. 
 
+### (5) Logging
+Der Author geht darauf ein, dass man mit dem verschleiern der Fehlermeldungen zu weit gehen kann,
+sodass dann die Anwendung schlechter Wartbar ist. Im allgemeinen Empfiehlt es sich
+ordentlich die Anwendung zu Loggen, um den Weg des Fehlers nachvollziehen zu können.
+So kann man also die Entscheidungen des Programms lesen und trotzdem die Schnittstelle gering halten
 
+## Designen Sie zweimal
+Der erste versuch etwas zu gestalten oder zu planen, wird niemals der Beste oder der Erfolgreichste sein.
+Damit ein gutes Design entstehen kann, muss abgewägt werden, es muss verworfen werden, es muss diskuttiert werden und es muss damit gearbeitet werden. Das ist ja das schöne an Software. Wenn ich merke hey Ansatz XYZ Funktionier nicht oder ich kenne einen einfacheren Weg, dann kann ich das (in der Regel) auch Ändern. Es lohnt sich durchaus sich auch mal die Entwürfe ehrlich miteinander zu vergleichen. Wenn ein alter Entwurf eine spaghetti Implementierung hatte, aber eine geniale Schnittstelle, ist es doch durchaus möglich die Vorteile daraus zu ziehen und daraus zu lernen. Das führt automatisch zu einem besserem Design.
 
+Auch bei Implementierungen gibt es mehrere Möglichkeiten, eine Entscheidung zu treffen? Speicher ich das alles in einem Buffer? Mach ich eine HashMap draus? Ich habe für jeden Weg ja unterschiedliche Optionen offen. Das sollte ich Nutzen und die Vor und Nachteile gegeneinander aufwiegen. Welche Implementierung ist besser in der Performance? Welche ist einfacher? Wichtig ist, dass sowas <b>SCHNELL</b> gehen muss. Ich habe in der Regel
+nicht die Zeit Stundenlang über ein Design zu philosphieren. Dabei hilft aber vor allem: Erfahrung.
 
+## Über Kommentare
+Gute Dokumentation ist wichtig. Keine Ausreden. Gute Dokumentation erhöht die Codequalität und macht es
+einfacher mit bestimmten Abstraktionen zu arbeiten. Es gibt im Wesentlichen ein paar bullshit Ausreden, die Entwickler nutzen, um keine Kommentare zu schreiben. Das ganze läuft unter dem Motto: "... and other hilarious jokes you can tell yourself"
 
+### Guter Code dokumentiert sich selbst
+Das ist schlichtweg gelogen. Natürlich gibt es code, der eher die Intention des Autor ausdrückt als 
+anderer Code. Also wo die Variablen besser benannt sind, aber WARUM ich etwas tue, also
+um eine Metaebene Aufzubauen, oder ein bestimmtes Narrativ zu bekommen für den Code geht nur mit Kommentaren.
+Es geht darum, bedeutungsvolle Kommentare zu schreiben, die nicht ein Stoppschild beschreiben,
+also das Offensichtliche wiederholen. (Retun Node ... ;) ). Sondern es muss beschrieben werden, was die Rückgabewerte bedeuten, welche Designentscheidungen getroffen wurden.
 
+Besonders bei großen Systemen bedeutet es einen immensen Aufwand das Verhalten einer Schnittstelle 
+erst durch den Code zu lesen, statt dass es Erklärt oder Dokumentiert ist. 
+<b>Wenn ich den Code erst lesen muss, um zu wissen, was er kann gibt es KEINE Abstraktion </b>
+Ohne Kommentare bleiben nur Namen, Typen und Rückgabewerte. Nur damit ist es sehr schwer die Intention auszudrücken. Es macht ja auch Sinn die Implementierung in einem Methodenkommentar grob zu beschreiben, da ich dann nur durch die Schnittstelle auch weiß, wie sich das ganze Intern verhält, ohne dabei den Code gelesen zu haben. Das erfordert allerdings, dass Methodenkommentare aktuell gehalten werden müssen und dass bei anderen Designentscheidungen auch die Kommentare gewartet werden müssen. Das gehört hald einfach dazu.
 
+### Ich habe da keine Zeit für
+(Siehe taktische vs Strategische Programmierung). Es gibt immer wichtigere Dinge als Dokumentation und wenn der Projektmanager die Wahl hat zwischen Doku und Feature, wird immer Feature gesagt werden. Die Illusion ist, dass wir den Leuten die Wahl lassen. Die halbe Stunde kann ich mir auch eben nehmen, n paar Zeilen zu schreiben, verweise zu schreiben. Vielleicht auch noch nen Klassenkommentar zu machen, der die Schnittstelle beschreibt, und dann auf die Methoden eingehen. Die Zeit MUSS ich mir einfach nehmen.
+
+### Aber die Kommentare veralten ja..
+Ja klar tun sie das, wenn du die Implementierung Änderst und dann den Methodenkopf nicht anpasst.
+Oder du vergisst die Kommentare vor den Methoden aufrufen oder ein anderer löscht die Stelle der Doku,
+die für dein Feature gebraucht wird(was sowieso nicht vorkommen sollte)...
+Reviewe deinen Code, Nutze das Versionierungssystem. Passt der Commit zu dem was du geschrieben hast und spiegeln die Kommentare die Intention wieder? 
+
+### Die Vorteile
+Kommentare bieten die Möglichkeit der Metadokumentation. Ich kann das niederschreiben,
+was ich im Kopf hatte, als ich das geschrieben habe und kann so dem nächsten
+Programmierer somit eine Idee geben, wie ich das ganze gedacht habe,
+was ich mir vorgestellt habe etc. Jeder hat ja eine andere Struktur, so kann ich
+durch meine Kommentare anderen meine Struktur zeigen und somit mein Design OFFENSICHTLICH machen.
+
+>Dokumentation kann kognitive Last reduzieren. 
+
+Das geschieht, indem alle relevanten Informationen zu dem Code den ich grad geschrieben habe explizit erwähnt werden. So bleiben keine Informationen verborgen und so kann auch jeder damit arbeiten.
+Ein gutes Design kann kommentare deutlich reduzieren, ja aber niemals ersetzen.
+Kommentare sind keine Fehler. 
