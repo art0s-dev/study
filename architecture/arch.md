@@ -408,3 +408,28 @@ durch meine Kommentare anderen meine Struktur zeigen und somit mein Design OFFEN
 Das geschieht, indem alle relevanten Informationen zu dem Code den ich grad geschrieben habe explizit erwähnt werden. So bleiben keine Informationen verborgen und so kann auch jeder damit arbeiten.
 Ein gutes Design kann kommentare deutlich reduzieren, ja aber niemals ersetzen.
 Kommentare sind keine Fehler. 
+
+## Wie sehen denn gute Kommentare aus?
+In der Regel bedarf es dazu guter Konventionen. Wenn ich sowas geordnetes wie javadoc have, sollte
+ich es nutzen, weil es ein bereits etabliertes system ist.Es gibt mehrere Arten von Kommentaren:
+- Schnittstelle (jdoc methoden)
+- Datenstrukturen (Wer greift worauf zu?)
+- Implementierung(wie funktioniert die Methode intern)
+- Modulübergreifend (welches modul hat welche abhngigkeiten)
+
+Die ersten beiden Kategorien sind die wichtigsten. Kommentare sollen den Code 
+nicht wiederholen, sondern das beschreiben was nicht offensichtlich ist.
+Also nicht return node sondern ich beschreibe eher im methodenkopf das was die methode machen soll,
+worauf der anwender achten muss, wie sie sich sonst verhält. Alles andere innerhalb der 
+methode kommentiere ich nur, wenn es nicht offensichtlich ist, oder um die intention besser auszudrücken.
+Ich mag es auch gerne bei längeren methoden Kommentare zu nutzen, für visuelle gruppierung.
+
+Auch beliebter fehler ist es in einem Methodenkommentar den Methodenkopf zu beschreiben.
+In wie fern entscheidet sich X von Y? Was muss ich beim Einsatz beachten?
+Vor allem: Was sagt der Wert über den Zustand der Schnittstelle aus.
+
+Und nochmal: Zustände und Datenstrukturen müssen dokumentiert werden.
+Im Prinzip habe ich beim Kommentieren 2 möglich Ebenen: makro und micro.
+Die Makroebene soll die Schnittstelle und das generelle High-level verhalten beschreiben.
+Die Micro ebene geht im Low level bereich auf die Entscheidungen ein.
+
