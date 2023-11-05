@@ -53,7 +53,7 @@ und man kann sich die Funktionalität nicht erschließen.
 >ein System, welches Abhängigkeiten, Intention klar kommuniziert (gerne mehr Zeilen, wenn Sie kein Sprachdurchfall sind),
 >ein System, welches gut Dokumentiert und _offensichtlich_ ist.
 
-## Ursachen für Komplexität
+### Ursachen für Komplexität
 Unter anderem kann man Abhängigkeiten als einer der Ursachen für Komplexität zählen.
 Ganz vermeiden lassen sie sich nicht, aber ausdünnen. In der Regel hat man 2 Seiten der Abhängigkeit.
 Einen Sender und einen Empfänger. Beispiel Webseite: Irgendwo muss eine Klasse definiert werden,
@@ -93,7 +93,7 @@ Damit wir allerdings die Produktivität nicht vernachlässigen wäre eine Spanne
 Also von 8 Stunden Arbeit - 1,5 Stunden. Es geht nicht darum jeden Tag eine Bärenladung zu schaffen, sondern
 einfach darum jeden Tag ein bisschen zu machen. (Natürlich gibt es größere Brocken und kleinere Brocken - das ganze muss nochmal weiter aufgeteilt werden. Aber wann lohnt sich das alles? Kurzum: Wenn ich vor habe das Projekt langfristig zu betreuen.
 
-## Von der Wahrheit
+### Von der Wahrheit
 Wir wissen: wenn wir einmal anfangen mit dem Kurs "taktisch", muss die Umkehr vom Kurs genau berechnet werden.
 Wie viel kostet es alles neu zu schreiben vs wie viel kostet das aufräumen vs wie viel kostet es, alles zu lassen wie es ist?
 
@@ -101,7 +101,7 @@ Aber: taktisch geht schneller; erzeugt aber technische Schuld. Facebook hat das 
 ungemein und die Lernkurve wird auch eine immer bessere, aber selbst FB haben hinterher ihr Motto geändert.
 Eine starke technische Kultur, die Lösungsorientiert arbeitet ist der Schlüssel zum langfristigen Erfolg.
 
-## Modulares Design
+### Modulares Design
 Das beste was passieren kann, ist das Module vollkommen losgelöst voneinander bearbeitet werden können.
 Somit würde die Software nur so komplex sein, wie das schlimmste Modul. Ist leider nur unrealisitisch.
 Module MÜSSEN zusammenarbeiten. Also ist es das Ziel die Abhängigkeiten zwischen Modulen zu verringern.
@@ -122,7 +122,7 @@ desto besser ist die Abstraktion.Eine Abstraktion die wichtige Informationen weg
 ist grundsätzlich fehlerhaft. Jedes mal, wenn ich etwas tun kann, ohne zu verstehen was unter der Haube ist,
 hat die Abstraktion mir Zeit erspart. 
 
-## Natur der Module
+### Natur der Module
 Es gibt Tiefe und Flache Module. Fangen wir einfach mit den tiefen Modulen an.
 Ein "tiefes" Modul hat viel viel viel Funktionalität inne, bieter aber zugleich eine minimale Schnittstelle mit nur wenigen
 Methoden. So ist es einfach das ganze zu begreifen. Wir bevorzugen immer Tiefe Module.
@@ -142,7 +142,7 @@ Als negativbeispiel wird die Java I/O genannt. Es müssen unsinnige buffered Obj
 lesen zu können. Da lässt der Author die Gegenthese Fallen
 <b>Schnittstellen sollten so designed sein, dass sie den häufigsten Fall abdecken</b>
 
-## Information Hiding
+### Information Hiding
 Es ist das Ziel eines Moduls die Internen Informationen der Implementierung und
 die damit einhergehende Komplexität um jeden preis nach außen zu verbergen. Datenstrukturen sollten auch möglichst versteckt sein.
 Wenn ein Modul keine Abhängigkeiten in der Schnittstelle kommuniziert, sollten keine Abhängigkeiten existieren - noch nicht mal Implizite.
@@ -181,7 +181,7 @@ Für Interne schnittstellen innerhalb einer Klasse: Wenn ich per getter mir die 
 und ganz nach oben in die Methode packe und es als Dependency injection verkaufe hab ich besonders hart gefailed.
 Weil dafür gibt es ja parameter und das ist implizite Konmplexität. Also: Stellen minimieren, wo ich auf instanzvariablen zugreife.
 
-## Vielseitige Module
+### Vielseitige Module
 Spezialisierung führt zu Komplexität. Generalisierung zu guten Abstraktionen. Wenn ich mit einer Codierung, die 80% aller Fälle abdeckt 
 arbeiten kann, ist sie gut. Eleminiere Sonderfälle durch die Schnittstelle und decke Randfälle möglichst automatisch ab.
 Spezifische Implementierung muss in der Wartung oftmals wieder aufgeschnitten werden und erweitert werden.
@@ -206,7 +206,7 @@ Außerdem müssen so andere Entwickler nicht die ganzen edgecases lernen, sonder
 > - _In wie vielen Situationen wird diese Methode eingesetzt werden?_ 
 > - _Kann man die Schnittstelle einfach verwenden?_
 
-## Spezialisiserung nach Oben oder nach unten schieben
+### Spezialisiserung nach Oben oder nach unten schieben
 Spezialisierung ist in Softwaresystemen nicht vermeidbar. Oftmals zahlt der Kunde für spezialisierte Features.
 Da habe ich prinzipiell 2 Optionen das ganze anzugehen. Ich gehe immer davon aus, dass die Anwendung einen generalisierten Kern hat.
 Dieser Kern bietet eine einfache Schnittstelle für z.B das Gui. Wenn ich eine spezialisierte Lösung implementieren soll, muss ich schauen was besser passt:
@@ -218,7 +218,7 @@ der Anwendung generalistisch.
 Es ist ebenfalls möglich beides zu machen. Also Anwendungsregeln in einer generalisierten Klasse zu verfassen 
 und die Umsetzung der Regeln in einem Spezialsiertem Submodul vorzunehmen (wobei man da auch auf diese Klassizites achten muss.. weniger ist da mehr )
 
-## Verschiedene Schichten - Verschiedene Abstraktionen
+### Verschiedene Schichten - Verschiedene Abstraktionen
 Software ist eine Zwiebel Aus Theken. Jede Schicht bedient sich an der unteren. Je weiter nach unten es geht, desto "low leveliger" sollte es werden.
 Also sollten sich die Oberen Schichten nicht mit Speicherkapazität oder Output Buffer befassen und die Unteren nicht Gui Logik - sollte eigentlich klar sein.
 
@@ -229,7 +229,7 @@ alles nachzuvollziehen. Außerdem sorgen diese Art der Methoden dafür, dass ref
 Das ganze lässt sich vermeiden, indem man die Methoden entweder direkt aufrufen kann oder den Callstack(wenn er nur einmal verwendet wird) hinter einer guten Api
 in einer Klassse eindampft.
 
-## Wann ist es OK dopplungen zu haben?
+### Wann ist es OK dopplungen zu haben?
 Bei Dispatchern ist das grundsätzlich erstmal OK. Ein dispatcher ist eine Methode, die als "controller" andere Methoden aufruft und Argumente weitergibt.
 Dieser stellt im Gegensatz zu Pass thru methoden eigene Funktionalität zur Verfügung.
 Ein Dispatcher wird z.B bei der Implementierung einer Api oftmals genutzt, um die unterschiedlichen HTTP Methoden anzusteuern.
@@ -242,14 +242,14 @@ sich allerdings fragen:
 - Könnte man einen bereits bestehenden Decorator Nutzen?
 - Muss es als decorator laufen oder kann es auch als einzelne Komponentenklasse implementiert werden?
 
-## Pass Thru Variablen
+### Pass Thru Variablen
 Wenn ein größeres System gewarter wird, neigt man oftmals dazu einfach die Parameterliste einer Methode zu erweitern
 und dann dort die benötigte Funktionalität einzufädeln. Das bitte nicht tun, sondern mögliche einfachere alternativen zum Umgang 
 mit Objekten nutzen. Ist ein DTO für die Parameter Sinnvoll? So haben wir nur einen Parameter, können die Liste verlängern
 und das Feld, was wir hinzufügen möchten komplett Optional machen. Wird zwar nicht gerne gesehen aber es ist auch möglich
 das gewünschte Feld als Globale Variable (scoped innerhalb der muttermethode) zur verfügung zu stellen.
 
-## Komplexität nach unten ziehen
+### Komplexität nach unten ziehen
 > Einfache Schnittstelle > einfache Implementierung. 
 > Entweder ist die Komplexität in der Sprache oder in der Anwendung.
 
@@ -259,7 +259,7 @@ Konfigurationsparameter. Allerdings führt jeder Parameter auch dazu, dass sich 
 Also wäre Ideal jeden Edgecase durch Konfigurationsparameter Abzufangen und einen Standartwert zu schaffen.
 Also für den Fall, dass es doch jemand konfigurieren und verändern möchte (man es sich aber nicht merken muss (80 - 20 regel))
 
-## Zusammen oder getrennt?
+### Zusammen oder getrennt?
 Es gibt 2 Worstcase Szenarien. 1) Die Gesamte Software befindet sich in einer Klasse. 2) Die Gesamte Software befindet sich in 627.844 Klassen
 Wir merken also Komplexität steigt in der Implementierung mit der Tiefe der Klasse (wenige Klassen - kleine schnittstellen) und die Komplexität
 steigt in der Anzahl der Schnittstellen. (Wilde Getter Setter, Pass thru methoden) Ebenfalls macht das Aufteilen einer Methode die Methode schwerer Lesbar.
@@ -409,7 +409,7 @@ Das geschieht, indem alle relevanten Informationen zu dem Code den ich grad gesc
 Ein gutes Design kann kommentare deutlich reduzieren, ja aber niemals ersetzen.
 Kommentare sind keine Fehler. 
 
-## Wie sehen denn gute Kommentare aus?
+### Wie sehen denn gute Kommentare aus?
 In der Regel bedarf es dazu guter Konventionen. Wenn ich sowas geordnetes wie javadoc have, sollte
 ich es nutzen, weil es ein bereits etabliertes system ist.Es gibt mehrere Arten von Kommentaren:
 - Schnittstelle (jdoc methoden)
@@ -432,4 +432,42 @@ Und nochmal: Zustände und Datenstrukturen müssen dokumentiert werden.
 Im Prinzip habe ich beim Kommentieren 2 möglich Ebenen: makro und micro.
 Die Makroebene soll die Schnittstelle und das generelle High-level verhalten beschreiben.
 Die Micro ebene geht im Low level bereich auf die Entscheidungen ein.
+
+Beides zu verwenden ist der Schlüssel zum Erfolg. Es sollte bei Schnittstellen an der Klasse eine Schnittstellenbeschreibung geben, was man von dieser Schnittstelle zu erwarten hat auf einer high-level ebene. Schnittstellenkommentare dürfen auf gar keinen Fall die Besonderheit der Implementierung
+beschreiben, da das niemanden in der Schnittstelle interessiert.
+
+### Implementierungskommentare
+Das Hauptziel der Implementierungskommentare ist es dem Leser zu erklären,
+was der code tut und nicht wie er es tut. Der Author verlangt also Section Kommentare, um die Prozedur auf einer Abstrakten Ebene darzustellen. Ebenfalls verlang er für längere Iterationen Schleifenkommentare, damit der Leser weiß, was in der Schleife geschieht.
+
+### Interessanter Ansatz
+Schreibe die Designnotes, Designentscheidungen, Problemlösungen und das allgemeine 
+Domönenwissen zur Problemlösung in eines oder mehrere Designdokumente und verweise in den Kommentaren 
+auf die Designdokumente. So kann jeder Leser das ganze kreuzweise Referenzieren, wenn es dann mal etwas komplexer wird und man wirklich Hintergrundinformationen zu einem Thema braucht.
+Dann kann man sowas wie `// @see DesignDocs/architecture.md`in den code einpflegen
+
+## Über die Benennung 
+> _2 Dinge sind wirklich schwer. Variablen benennen und Caches._
+
+Wir gehen in der These davon aus, dass gute Namen von Variablen zu Wartbarem Code führen. Durch Bezeichner können Informationen kommuniziert werden, welche für die Wartung des Codes genutzt werden kann. So hat der Author zum Beispiel einen Riesigen Bug gefunden, welcher über ein halbes Jahr hinweg sine Software geplagt hat. Schuld war falsche oder irreführende Benennung. Der Author rät daher, dass man sich nicht mit Namen zufrieden gibt, die "ziemlich gut sind", sondern mit Namen, die genau passen und wasserdicht sind.
+
+Namen sind eine vereinfachte Form der Abstraktion. Wir meinen eine bestimmte Form, einen Rhytmus eine Melodie oder ein Objekt und wir bezeichnen es. Je genauer oder treffender wir etwas bezeichnen, desto wahrscheinlicher ist es, dass unser Leser das gleiche Bild im Kopf hat.
+
+Namen sollten 2 Eigenschaften haben:
+- Präzision
+- Konsistenz
+
+Folgende Namen sind ab jetzt tabu:
+- data
+- row
+- count
+- object
+- Dinge
+- ...
+
+Das sind alles zu allgemein gehaltene Namen, die absolut nichts bezeichnen und auch
+nicht wirklich Aussagekräftig sind. Wenn es nicht um Mathematische Operationen geht, sollten
+x und y eigentlich auch hochgradig illegal sein. Genau so wie i und j ohne den Kontext einer Schleife.
+Man kann schon alleine mit dem Namen auf den Zustand und mit dem Typ auf die Konsistenz schließen.
+Beispiel: `Boolean IsCursorVisible = true;`N,e
 
