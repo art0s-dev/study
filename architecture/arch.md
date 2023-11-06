@@ -462,6 +462,7 @@ Folgende Namen sind ab jetzt tabu:
 - row
 - count
 - object
+- result
 - Dinge
 - ...
 
@@ -469,5 +470,49 @@ Das sind alles zu allgemein gehaltene Namen, die absolut nichts bezeichnen und a
 nicht wirklich Aussagekräftig sind. Wenn es nicht um Mathematische Operationen geht, sollten
 x und y eigentlich auch hochgradig illegal sein. Genau so wie i und j ohne den Kontext einer Schleife.
 Man kann schon alleine mit dem Namen auf den Zustand und mit dem Typ auf die Konsistenz schließen.
-Beispiel: `Boolean IsCursorVisible = true;`N,e
+Beispiel: `Boolean IsCursorVisible = true;`
+
+### So bekommt man da Konsitenz rein
+
+Wenn es schwer ist, eine Variable treffend zu benennen,  liegt noch nicht 
+genügend Klarheit über Design und Konzept zu grunde. Ich kann hier noch 
+kein klares Bild zeichnen, da vielleicht Anforderungen fehlen oder oder...
+
+Namen müssen konsistent eingesetzt werden. So kann man selbst in großen Softwaresystemen
+immer den Überblick behalten und viele Fragen klären. 
+Konsistenz besteht aus 3 Anorderungen:
+- Nutze immer den gleichen Namen für den gleichen Zweck
+- Verwende den gewählten Namen niemals für etwas anderes
+- Stelle sicher, dass alles mit gleichem Namen auch das gleiche Verhalten hat
+
+><b>Tipp:</b> Für wirklich Präzise Benennung kann man bei wirklich sehr ähnlichen Variablen 
+>mit einem Präfix / Suffix System arbeiten. also wenn ich z.B sowas habe wie FileBlock
+>kann ich als Präfix sowas wie source oder destination verwenden. Draus wird für Filesystem Operationen
+> dann der sourceFileBlock.
+
+### Überflüssige Informationen Vermeidenf
+In den meisten Programmiersprachen arbeitet man mit einem Typensystem.
+Das Typensystem liefert viele Informationen über die Variable.
+Grade in Sprachen wie Java, Rust etc. ist es möglich sehr viele Informationen
+über das Typensystem auszudrücken, sodass ich Benennungen wie object
+oder class oder FileList aus der Benennung streichen kann, da ja bereits Annotationen
+durch das Typensystem existieren. so wird aus fileList List<File> documentsToScan.
+
+Auch durch Klassen oder besimmten Kontext ist es möglich Informationen zu reduzieren.
+In einer Klasse namens File muss ich kein Attribut haben, was FileBlock heißt.
+Ich kann es also einfach Block nennen. 
+
+## Kommentare zuerst schreiben
+Menschen denken sowieso in Schritten und in Prozeduren. Das ist schwer zu ändern.
+Das ist einfach so. Und das kann man sich im Designprozess zu Nutze machen.
+Ich kann zur Struktur beitragen, indem ich erstmal die Sektionskommentare schreibe.
+Also grob erstmal reinkloppen, was ich denn überhaupt da verarbeiten will und davon erwarte.
+Dann nen Methoden Kommentar schreiben, was die Schnittstelle ist und dann nachdem das 
+Grundgerüst steht weiter in die Tiefe der Implementierung gehen.
+
+Somit weißt du automatisch wieder, wo du dich befindest, wenn du mal 2,3 Tage den Code
+nicht angesehen hast und andere werden es dir danken. Der Author empfiehlt das Schreiben
+der Kommentare direkt in den Desingprozess mit einzugliedern. Das hilft gegen
+technische Schuld.
+
 
