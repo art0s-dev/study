@@ -515,4 +515,8 @@ nicht angesehen hast und andere werden es dir danken. Der Author empfiehlt das S
 der Kommentare direkt in den Desingprozess mit einzugliedern. Das hilft gegen
 technische Schuld.
 
+Wenn der Kommentar schlecht zu schreiben ist, oder schwierig zu beschreiben ist,
+liegt Unklarheit vor. Wenn der Kommentar zu komplex ist und viel viel zu lang ist,
+deutet das auf eine zu komplexe schnittstelle hin.
+
 
