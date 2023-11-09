@@ -519,4 +519,40 @@ Wenn der Kommentar schlecht zu schreiben ist, oder schwierig zu beschreiben ist,
 liegt Unklarheit vor. Wenn der Kommentar zu komplex ist und viel viel zu lang ist,
 deutet das auf eine zu komplexe schnittstelle hin.
 
+## Die Wartung aka. bestehenden Code anpassen
+
+Ein wachsendsendes Softwaresystem fußt immer auf den inkrementell getroffenen Entscheidungen,
+welche im Laufe des Designprozesses getroffen wurden. Im Laufe der Warung einer Anwendung ist es wichtig,
+Strategisch zu denken. Also eine Investitionsmentalität mit sich zu bringen. Man neigt bei großen Codebases ja dazu,
+dass man nur "kleine" Änderungen macht, sodass man nur den kürzesten Weg zum beheben des Problems geht.
+Das Problem ist, dass das zu "mülligem" Code führen kann. 
+
+>Ich muss gestehen, dass ich das anders sehe. Das ist son Ding, was man nur macht, 
+>wenn man zu 100% die Domäne und das Feature kennt. Außerdem gibt es auch Ecken in einer Codebase
+>die nicht getestes sind, wie kann ich da etwas Ändern (außer Benennung), wenn keine Tests vorhanden sind?
+
+Der Author empfiehlt auch bei kleinen Änderungen auf die Abstratkionsebene einzugehen und die Codebase aus
+der Makroebene heraus zu sehen (oder zumindest das Feature). Das finde ich löblich, aber ist im "alltag" kaum umzusetzen,
+wenn die Vorraussetzungen nicht stimmen. Was aber möglich ist: Die Schnittstelle zu verbessern durch Kommentare, Schnittstellenkommentare für die Klassen, Methodenkommentare und Implementierungskommentare. Wenn ich wirklich die 
+Funktionsfähigkeit einer Funktion beweisen kann (weil ich sie grade Teste) kann ich ja auchmal 1,2 If verschachtelungen auflösen.
+
+>Ich persönlich finde den "Pfadfinder" Gedanken von Uncle Bon ganz gut - aber alles Aufräumen zu wollen, 
+> für naiv und unrealistisch (grade wenn es legacycode ist) Wer weiß vielleicht änder sich diese Einstellung 
+>ja noch bei den kommenden Büchern.
+
+<b>Verbessern Sie das Design nicht, machen Sie es vermutlich noch schlimmer </b
+
+### Kommentare pflegen
+
+>Merke: Kommentare kann man besser anpassen, wenn sie nahe am Code sind.
+
+Die Pflege von Kommentaren sollte vor allem der Kommentare gelten, die durch Konventionen vereinbart wurden.
+z.B Phpdoc, javadoc oder doxygen.
+
+
+
+
+
+
+
 
