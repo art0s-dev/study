@@ -547,7 +547,52 @@ Funktionsfähigkeit einer Funktion beweisen kann (weil ich sie grade Teste) kann
 >Merke: Kommentare kann man besser anpassen, wenn sie nahe am Code sind.
 
 Die Pflege von Kommentaren sollte vor allem der Kommentare gelten, die durch Konventionen vereinbart wurden.
-z.B Phpdoc, javadoc oder doxygen.
+z.B Phpdoc, javadoc oder doxygen. Allgemein sollte gelten: Je weiter ein kommentar vom Code enfternt ist,
+desto abstrakter sollte er sein. Dokumentation sollte also da platziert werden, wo Sie gelesen wird. Also im Code und
+nicht im Commitlog. Wenn ein Schweres Problem aufgetreten ist, sollte die Lösung oder die Begründung warum was eingefügt wurde 
+in den Code geschrieben werden, statt das ganze im commitlog "verrotten" zu lassen.
+
+Es gilt ebenfall Duplikate zu vermeiden. Gerade Variablen die nach außer geöffnet sind oder Configs sind anfällig für sowas.
+Dokumentier die Sachen an einer Zentralen Stelle. So musst du nicht überall die Implementierung dokumentieren.
+Wenn es keinen wirklichen Zentralen Ort gibt, sollten hier die Designnotes herhalten. (Die übergeordnete Entwicklerdokumentation)
+In den meisten Fällen reicht ja ein Verweis auf die Designdokumentation. Aber: Dann musst du die Designdocs aktualisieren.
+
+Wenn ich mit Bibliotheken oder mit 3rd Party dependencys oder Services arbeite, reicht es in der Regel das WARUM
+an die Externe Dokumentation auszulagern. Also ein `//@see ...`.
+Ebenfalls zum pflegen der Kommentare sollten regelmäßig die Diffs angesehen werden.
+Es ist schlau das wie bei IKOffice vor einem Commit zu machen. Dort schauen wir jeden Commit nochmal komplett durch.
+
+Im Allgemeinen ist es schwerer Code zu pflegen, der nahe an der Implenterung ist. Wenn sich die Implementierung änder, muss sich auch der Methodenkommentar ändern, wenn ich allerdings z.B nur den methodenkörper ändere, muss ich nicht z.B den Schnittstellenkommentar anrühren.
+Das muss ich erst bei nem Refactoring. 
+
+## Konsistenz
+
+Konsistenz ist DAS Mittel der Wahl, um gegen Komplexität anzugehen. Ist ein System konsistent ist es nicht nur verlässlich, 
+sondern auch integer und verringert den Schulungsbedarf. Ein gutes Beispiel für Konsistenz befindet sich bei meinem Arbeitgeber
+IKOffice. Jede Entity hat eine Form, welche das Gui beinhaltet, eine Impl die das Verhalten beinhaltet, oftmals eine Managerklasse, die als Übergeordneter Controller dienen kann, eine Editorklasse, die ein Interface für die einfache berarbeitung bietet und für den Kunden eine Ableitung mit dem Selben Namen der Klasse aus dem Kern der Anwendung nur mit dem Kunden davor also `KundePurchaseOrderEditor`
+Das ist ein gutes Beispiel für KOnsistenz in der Benennung. 
+
+Konsistenz im Coding Stil ist auch eine gute Form. Es gibt ja die Tolle Regel "When you're in rome, do as the romans do". 
+Das macht es leicht eine Einheitliche Linie zu fahren, was den Code angeht und damit fügt sich der Code auch nahtlos in dern restlichen code ein.
+Schnittstellen und implementierung der Interfaces sind auch ein gutes Beispiel für Konsistenz. Wenn ich bereits einmal eine Schnittstelle und ihre 
+Implementierung verstanden habe, ist es ein leichtes einene weitere Implementierung anzusetzen (insofern die Implementierung dokumentiert ist), weil ich dann weiß, was ich zu erwarten habe. 
+
+Design Patterns sind z.B auch ein gutes Beispiel für Konsistenz, da sie (wenn sie nicht total obskur sind) die Anwendung wartbarer machen.
+Konsistenz kan über die Zeit durch unachtsamkeit gefährdet werden. (Neulinge sind da sehr anfällig für - ja auch ich).
+Man kann die Konsistenz sicherstellen, indem z.B Coding oder Architekturrichtlinien festgehalten werden. 
+
+Am besten kann man z.B Coding Conventions einhalten, indem man ein Tool zur Prüfung des Codes abrichtet.
+Grad Line endings können da gerne mal zu einem Problem werden, wenn man auf unterschiedlichen Plattformen entwickelt.
+Ebenfalls führen Code Reviews zu mehr Konsistenz, da der reviewer die Konventionen durchsetzen kann.
+
+Bestehende Konventionen zu ändern zeugt auch nicht von Konsistenz. Auch wenn es die "bessere Idee" ist, lass es.
+Erst wenn 20 Leute in einer Organisation alle dafür stimmen Regel X über Board zu werfen einfach weil es keinen Sinn macht, sure go ahead
+aber wenn es um Konsistenz geht behält man die Regeln bei, auch um der Regel willen. (So spart man sich auch Entwicklungszeit,
+weil man so Immun gegen jedes neue Framework wird)
+
+
+do
+
 
 
 
