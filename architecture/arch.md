@@ -590,8 +590,30 @@ Erst wenn 20 Leute in einer Organisation alle dafür stimmen Regel X über Board
 aber wenn es um Konsistenz geht behält man die Regeln bei, auch um der Regel willen. (So spart man sich auch Entwicklungszeit,
 weil man so Immun gegen jedes neue Framework wird)
 
+## Guter Code ist offensichtlich
 
-do
+Unklarheit soft für Komplexität und tritt auf, wenn Informationen fehlen und nicht transportiert werden.
+Die Lösung wäre es den Code so zu schreiben, dass er explizit die Anforderungen kommuniziert.
+Wenn Code offensichtlich ist, (langweilig) kann der Code schnell gelesen werden und
+das zusammentragen von infos geht schneller, weil man jetzt den Code nicht mehr verstehen oder interpretieren muss.
+Der Leser bestimmt, wie offensichtlich Code ist. Offensichtlichkeit stellt man durch code Reviews fest.
+Ich habe auch gute Erfahrungen damit gemacht, auch den code mal auf einem anderen Gerät zu lesen, z.B auf Github.
+
+### Was macht Code offensichtlich?
+Gute, aussagekräftige Namen und Kosistenz. Leerräume Nutzen, um code zu strukturieren. Also immer Codeblöcke die den gleichen gedanken hatten, gruppieren. Auch dokumentation also methodenköpfe gerne einrücken und zwischenzeilen setzen, wenns zuviel wird.
+Auch in Schleifenköpfen mehr Whitespace verwenden und Kommentare Setzen.
+
+### Was macht Code _NICHT_ offensichtlich?
+Wenn Bedeutung und Verhalten von Code nicht durch schnelles durchfliegen verstanden werden können, ist das ein absolutes alarmzeichen.
+Eventgetriebene Programmierung macht viele Sachen schwerer, da die Events meist von den unterschiedlichen Modulen gerufen werden, oder hald von außen,
+was das Nachvollziehen des call Stacks schwerer macht. Tuples in statischen Sprachen sind auch schwierig. Also Record und Pair, weil dann jeder Wert 
+und deren Bedeutung Dokumentiert werden muss. Auch die Methoden(getKey, getValue) verschleiern das ganze. **Allgemein sollte sich software leicht lesen
+lassen und nicht leicht schreiben lassen.** Unterschiedliche Typen verwenden für den gleichen Zweck ist auch eine schlechte Idee.
+Code der die Erwartung verletzt ist auch richtig mies. Also grad so Atombomben Code, der dir auf die Füße fällt ist richtig mies.
+Also wenn der Code etwas macht und der Leser erwartet X es aber nicht im Code kommuniziert wird.
+
+
+
 
 
 
