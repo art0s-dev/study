@@ -603,7 +603,7 @@ Ich habe auch gute Erfahrungen damit gemacht, auch den code mal auf einem andere
 Gute, aussagekräftige Namen und Kosistenz. Leerräume Nutzen, um code zu strukturieren. Also immer Codeblöcke die den gleichen gedanken hatten, gruppieren. Auch dokumentation also methodenköpfe gerne einrücken und zwischenzeilen setzen, wenns zuviel wird.
 Auch in Schleifenköpfen mehr Whitespace verwenden und Kommentare Setzen.
 
-### Was macht Code _NICHT_ offensichtlich?
+### Was macht Code __NICHT__ offensichtlich?
 Wenn Bedeutung und Verhalten von Code nicht durch schnelles durchfliegen verstanden werden können, ist das ein absolutes alarmzeichen.
 Eventgetriebene Programmierung macht viele Sachen schwerer, da die Events meist von den unterschiedlichen Modulen gerufen werden, oder hald von außen,
 was das Nachvollziehen des call Stacks schwerer macht. Tuples in statischen Sprachen sind auch schwierig. Also Record und Pair, weil dann jeder Wert 
@@ -611,6 +611,46 @@ und deren Bedeutung Dokumentiert werden muss. Auch die Methoden(getKey, getValue
 lassen und nicht leicht schreiben lassen.** Unterschiedliche Typen verwenden für den gleichen Zweck ist auch eine schlechte Idee.
 Code der die Erwartung verletzt ist auch richtig mies. Also grad so Atombomben Code, der dir auf die Füße fällt ist richtig mies.
 Also wenn der Code etwas macht und der Leser erwartet X es aber nicht im Code kommuniziert wird.
+
+## Softwaretrends
+
+### OOP
+Objektorientierung ist das dominierende Paradigma der letzen Jahre. Viele der Konzepte können genutzt werden,
+um bessere Softwaredesigns zu schaffen. z.B Information Hiding ist ausgesprochen praktisch. Ousterhout spricht 2 mögliche Auspräungen in der
+Objektorientierung an. Da wäre einmal die Schnittstellenvererbung. Darunter versteht der abstrakte Methoden, welche die Kindklassen dazu zwingen die Signatur zu implementieren. Und dann die Implementierungsvererbung. Damit meint er die "klassische" vererbung. Diese Art der Vererbung __kann__ den Code Reduzieren. Das große Problem an der Implementierungsvererbung ist, dass die Vererbung an sich Abhängigkeiten zwischen eine Kind und Ihrer Elternklasse erzeugt. Es werden Attribute mitgenutzt und damit geht der Gedanke einer "sauberen" Schnittstelle flöten. Der Author zieht auch hier Komposition klar vor. Der Author schlussfolgert: OOP alleine verwenden, macht kein gutes Softwaredesign. Es ist ein Tool.
+
+### Agile Entwicklung
+Der Grundgedanke der agilen Entwicklung ist, dass die Entwicklung eine inkrementelle und iterative Strategie verfolgen soll. 
+Der Vorteil der agilen Entwicklung besteht in der inkrementellen Verbesserung des Produkts. Der Author sieht allerdings 
+ein Risiko in der agilen Entwicklung, wenn man ausschließlich Features bearbeitet, denn dies führt zu taktischer statt strategischer Programmierung.
+Seiner Meingung nach sollte das Ziel solcher Entwicklungsschritte immer die Abstraktion sein.
+
+### Unit tests
+Unittests sind Codeabschnitte, die lösgelöst vom Gesamtsystem getestet werden. Unittests sind von Vorteil, 
+da Sie das Refaktorieren erleichtern. Außerdem werden so viel eher Fehler aufgedeckt, bevor sie die Produktion erreichen.
+Der Author hält prinzipiell Unit und Systemtests (Integrationstests für wichtig und wertvoll).
+
+### TDD
+Hierbei geht es datum zuerst die Tests zu schreiben und dann die Implementierung geschehen zu lassen. 
+Der Author sieht dabei die gefahr, dass das gesamtdesign vernachlässigt wird,
+da nur von einer Implementierung (und Refaktorierung) zur nächsten gesprungen wird 
+und nicht das Design als ganzes in Frage gestellt wird.
+
+### Design Patterns
+Designpatterns lösen bestimmte vorhandene Probleme in der Softare durch ein vorgefertigtes Design.
+Es ist prinzipiell nicht verkehrt etwas wiederzuverwenden. Obacht: Jedes verwendete Pattern kann 
+die Komplexität der Anwendung erhöhen. 
+
+### Getter und Setter
+Laut Ousterhout sorgt das für eine viel zu flache Schnittstelle der Klasse - Er sieht es also als ein Anti Pattern.
+
+## Performance
+>Wie sehr sollte ich mich während des normalen Entwicklungsprozesses um performance kümmern?
+
+2 mögliche Wege hier: Alles mitnehmen, was geht und damit für Überkomplexen Code sorgen (SMF Forum) oder
+garnicht drauf eingehen und vollkommen ignorieren, bis es zu spät ist(Bestimmte proprietäre Software).
+Das beste wäre ein Zwischenweg. Regelmäßiges Benchmarken der Funktionen ist also ein muss. Dadurch wird sichtbar,
+welche Operationen eher "teuer" und eher "günstig" sind im Sinne der Performance. 
 
 
 
