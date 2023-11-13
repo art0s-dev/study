@@ -650,7 +650,15 @@ Laut Ousterhout sorgt das für eine viel zu flache Schnittstelle der Klasse - Er
 2 mögliche Wege hier: Alles mitnehmen, was geht und damit für Überkomplexen Code sorgen (SMF Forum) oder
 garnicht drauf eingehen und vollkommen ignorieren, bis es zu spät ist(Bestimmte proprietäre Software).
 Das beste wäre ein Zwischenweg. Regelmäßiges Benchmarken der Funktionen ist also ein muss. Dadurch wird sichtbar,
-welche Operationen eher "teuer" und eher "günstig" sind im Sinne der Performance. 
+welche Operationen eher "teuer" und eher "günstig" sind im Sinne der Performance.Wenn Performance von Anfang 
+an eines der Kernziele ist, sollte von Anfang an auch die Performance gemessen werden und nicht erst dann, wenn es zu spät. 
+
+Es müssen vor und nach Änderungen von jedem Modul vorgenommen werden, damit vergleiche angestellt werden können.
+Somit kann man performance Schwächen direkt in einigen Modulen ausmachen. 
+Der Auther schlägt außerdem vor performaten Code am "kritischen Pfad" zu designen. 
+Er meint damit, dass bestimmte Kernmodule, welche redesigned werden müssen (geht manchmal nicht anders),
+erstmal nur aus einfachen code am kritischen Pfad besten muss. Also der einfachst möglichste Code ohne Sonderfälle.
+Dann könnte man eine Messung vornehmen. Anschließend können die Sonderfälle generalisiert hinzugefügt werden.
 
 
 
