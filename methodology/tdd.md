@@ -71,6 +71,18 @@ Anbei Value Objekte Sind ein Pattern, allerdings haben sie eine Bedingung. Sie m
 >Wenn man in Java Objekte vergleichen will muss man equals und hash code
 >als methode implementieren
 
+Beck spricht von Triangulation, wobei er bemisst, wie sich das Inferface verhalten soll und wie es 
+sich NICHT verhalten soll. Also nimmt er neben AsserTrue auch Assert False in den selben Test rein.
+Ebenfalls wird empfohlen encapsulation wirklich zum Vorteil zu nutzen, da so das Interface klarer wird.
 
+## Franc-ly speaking
+Copypasta ist erlaubt, WENN ich es hinterher aufräume. Make it run, then make it right.
 
+## Equality for all, Redux
+Es wird vorgeschlagen Gemeinsamkeiten durch Vererbung in einer Superklasse zusammenzuführen.
+So kann man sich die Duplikation sparen. Sei ehrlich mit deinen Tests. Auch wenn du Angst davor hast,
+unliebsame Fälle zu testen, musst du es trotzdem tun, da du sonst nicht versichern kannst, dass dein Code nach
+einem Refactoring noch funktioniert. "Write the tests you wish you had"
+Wer legacy Codebases kennt, kennt das nur zu gut.
 
+## Apples and Oranges
