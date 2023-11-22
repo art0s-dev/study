@@ -86,3 +86,5 @@ einem Refactoring noch funktioniert. "Write the tests you wish you had"
 Wer legacy Codebases kennt, kennt das nur zu gut.
 
 ## Apples and Oranges
+Der Author versucht im Beispiel die Methode equals für die unterschiedlichen Währungen so zu implementieren,
+dass man die Kindobjekte miteinander vergleichen kann. Banane = Banane, orange != orange.
