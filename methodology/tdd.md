@@ -88,3 +88,31 @@ Wer legacy Codebases kennt, kennt das nur zu gut.
 ## Apples and Oranges
 Der Author versucht im Beispiel die Methode equals für die unterschiedlichen Währungen so zu implementieren,
 dass man die Kindobjekte miteinander vergleichen kann. Banane = Banane, orange != orange.
+
+--- 
+Der erste Teil ist scheinbar nur ein Praxisbeispiel.
+Der Author geht noch ne ganze weile in die Richtung und zeigt TDD aus der Perspektive des Programmierers.
+--- 
+
+
+## Retrospektive
+Das gezeigte Praxisbeispiel ist nicht fertig geworden. Es soll aber auch nicht fertig sein,
+um zu demonstrieren, dass TDD auch nur eine Methode und ein Leitfaden und Kein Heilsversprechen ist.
+Beck geht ebenfalls davon aus, dass man weitere Möglichkeiten nutzt, seinen Code automatisch reviewen zu lassen,
+das vereinfacht das Refaktorieren später.
+
+### Code Metriken
+Eine hier wirklich Interessante Metrik ist die zyklomatische Komplexität. Sie gibt an, wie viele Branches,
+nestings und Loops im Code zu finden sind. Der Author hat allerdings getrickst, indem er das Typensystem und
+eine menge Polymorphie genutzt hat (was meines wissens manchmal zu wesentlich Komplexeren Lösungen führen kann).
+
+### Test Qualität
+3 arten von Tests können NICHT durch Unittests ersetzt werden:
+- Performance
+- Stress (Load Balancing etc.)
+- Usability
+
+Es gibt ein paar Metriken die außerdem noch Interessant sind:
+- Statement Coverage (Wie viele Anweisungen wurden nicht mit einem Test gedeckt)
+- Defekt Einsetzung (Ein extra falsch implementierter Code MUSS den Test brechen)
+
