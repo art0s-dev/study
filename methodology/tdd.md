@@ -116,3 +116,46 @@ Es gibt ein paar Metriken die außerdem noch Interessant sind:
 - Statement Coverage (Wie viele Anweisungen wurden nicht mit einem Test gedeckt)
 - Defekt Einsetzung (Ein extra falsch implementierter Code MUSS den Test brechen)
 
+## The xUnit example
+Das Ziel des xunit Examples ist es einen Überblick über unit Testing Frameworks zu geben,
+etwas unter die Haube zu gehen und das ganze in python zu zeigen.
+
+Das erste Ziel ist es Test Methoden evaluieren zu können. Dabei geht ein testing Framework eigentlich immer gleich vor:
+
+- Global:
+	- Setup All (Findet vor der ersten Methode statt)
+- Einzelne Methode:
+	- Setup each (Findet vor jeder Methode statt)
+	- method (die zu testende Methode
+	- teardown each (Findet nach jeder Methode statt)
+- Global:
+	- Teardown all (Findet nach der letzten Methode statt)
+
+
+Die Idee ist eigentlich ziemlich einfach. Es wird ein Testobjekt erstellt, welches den Namen der Testmethode erhält.
+Das Objekt kann anschließend aussagen, ob der Test stattgefunden hat oder nicht und den Test laufen lassen.
+Das Ergebnis wird dann hinterher in den StdOut gepackt.
+
+Das Objekt für den Testwrapper bekommt eine run methode, die die methode über reflection ausführt.
+Das ganze wird dann als Programm (geht ja über die Kommandozeile) automatisiert.
+
+Der Ablauf eines Tests besteht eigentlich immer aus 3 Stufen:
+- Arrange (Objekte werden erstellt)
+- Act (Führe den Test aus)
+- Assert (Evaluiere das Ergebnis)
+
+Beim Erstellen des Setup Methoden haben wir prinzipiell einen Interessenkonflikt.
+Auf der einen Seite wollen wir geteilte Objekte haben, sodass jeder Test darauf zugreifen kann.
+Das bringt performance. Auf der anderen Seite wollen wir das aber auf gar keinen Fall,
+da sonst die Werte mutieren.
+
+Beck geht erstmal mit dem Ansatz, dass erstmal nichts mutiert wird. So behalten die Tests ihre Integrität.
+Es wird ebenfalls ein Schalter eingeführt, der überprüfen kann, ob das Setup einer Klasse bereits gelaufen ist.
+Auch hier scheint der Author über reflection arbeiten zu wollen.
+
+Beim Teardown macht Beck genau das gleiche. Um es noch besser visualisieren zu können, baut er für die Testsuite ein Log auf,
+sodass jedes Setup und jedes teardown auch im log eingetragen wird. 
+Danach implementiert Beck ein Counting System, um die durchgelaufenen Methoden zu zählen und über Erfolg und Misserfolg informieren zu können.
+( 5 run, 2 Failed)
+
+
