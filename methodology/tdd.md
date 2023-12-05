@@ -3,8 +3,8 @@
 Diese Notitzen beziehen sich auf das gleichnamige Buch von Kent Beck. Die Praxisübungen aus dem Buch werde ich
 in hexenhammer's testsuite anwenden.
 
-
-## Zum Vorwort
+## The Money Problem
+### Zum Vorwort
 
 Clean Code der Funktioniert ist gut weil:
 - die Entwicklung vorhersagbar ist
@@ -39,7 +39,7 @@ TDD ist auch eine technik die Moral zu erhöhen durch ein gutes tooling. Auch so
 
 TDD sorgt für ein solides "rock solid" Fundament.
 
-## Notitzen zum Geldproblem
+### Notitzen zum Geldproblem
 
 Der Author will wirklich, dass man in den Tests, ein möglichst gutes Interface designed.
 Der Vorschlag ist es sich wirklich von Test zu Test zu hangeln und sich auch gerne für den Arbeitsprozess
@@ -51,7 +51,7 @@ schlechtes Design und leaky abstractions (5 stellen müssen ein Verhalten implem
 Der Author bedient sich beim Refactoring stark am "klassischen" Klassenaufbau und klassischer OO.
 
 
-## Degenerate Objects
+### Degenerate Objects
 
 Der Author bezieht sich auf die 3 Stufen des Testens: 
 - Ein gutes Interface
@@ -65,7 +65,7 @@ Es ist ebenfalls möglich um einen Test grün zu bekommen, Werte mit Konstanten 
 WENN es hinterher durch die Implementierung ausgetauscht wird. So wird man flexibler.
 Der Vorteil liegt darin, dass man so viel eher ein Gespür dafür bekommt, wie sich das System verhalten soll.
 
-## Equality for all
+### Equality for all
 Anbei Value Objekte Sind ein Pattern, allerdings haben sie eine Bedingung. Sie müssen immutable sein.
 
 >Wenn man in Java Objekte vergleichen will muss man equals und hash code
@@ -75,7 +75,7 @@ Beck spricht von Triangulation, wobei er bemisst, wie sich das Inferface verhalt
 sich NICHT verhalten soll. Also nimmt er neben AsserTrue auch Assert False in den selben Test rein.
 Ebenfalls wird empfohlen encapsulation wirklich zum Vorteil zu nutzen, da so das Interface klarer wird.
 
-## Franc-ly speaking
+### Franc-ly speaking
 Copypasta ist erlaubt, WENN ich es hinterher aufräume. Make it run, then make it right.
 
 ## Equality for all, Redux
@@ -85,7 +85,7 @@ unliebsame Fälle zu testen, musst du es trotzdem tun, da du sonst nicht versich
 einem Refactoring noch funktioniert. "Write the tests you wish you had"
 Wer legacy Codebases kennt, kennt das nur zu gut.
 
-## Apples and Oranges
+### Apples and Oranges
 Der Author versucht im Beispiel die Methode equals für die unterschiedlichen Währungen so zu implementieren,
 dass man die Kindobjekte miteinander vergleichen kann. Banane = Banane, orange != orange.
 
@@ -95,18 +95,18 @@ Der Author geht noch ne ganze weile in die Richtung und zeigt TDD aus der Perspe
 --- 
 
 
-## Retrospektive
+### Retrospektive
 Das gezeigte Praxisbeispiel ist nicht fertig geworden. Es soll aber auch nicht fertig sein,
 um zu demonstrieren, dass TDD auch nur eine Methode und ein Leitfaden und Kein Heilsversprechen ist.
 Beck geht ebenfalls davon aus, dass man weitere Möglichkeiten nutzt, seinen Code automatisch reviewen zu lassen,
 das vereinfacht das Refaktorieren später.
 
-### Code Metriken
+#### Code Metriken
 Eine hier wirklich Interessante Metrik ist die zyklomatische Komplexität. Sie gibt an, wie viele Branches,
 nestings und Loops im Code zu finden sind. Der Author hat allerdings getrickst, indem er das Typensystem und
 eine menge Polymorphie genutzt hat (was meines wissens manchmal zu wesentlich Komplexeren Lösungen führen kann).
 
-### Test Qualität
+#### Test Qualität
 3 arten von Tests können NICHT durch Unittests ersetzt werden:
 - Performance
 - Stress (Load Balancing etc.)
@@ -158,4 +158,15 @@ sodass jedes Setup und jedes teardown auch im log eingetragen wird.
 Danach implementiert Beck ein Counting System, um die durchgelaufenen Methoden zu zählen und über Erfolg und Misserfolg informieren zu können.
 ( 5 run, 2 Failed)
 
+## Patterns for TDD
+
+### Isolierte Tests
+Es ist im prinzip ganz einfach: Wenn ein Test kaputt ist, soll auch nur eine Sache Kaputt sein.
+Wenn 2 Tests kaputt sind, sollen 2 Sachen kaputt sein. Wenn Test voneinander isoliert sind und atomar nur
+eine Funktionalität testen, können Fehler wesentlich früher erkannt und behoben werden.
+
+### Jetzt oder Später?
+Es kann immer sein, dass mir etwas beim Entwicklen auffällt oder zwischendrin in der "tiefen" Arbeitsphase etwas passiert.
+Das muss verhindert werden, indem 2 Notitzen geführt werden. Notitzen für das jetzt also vllt für die nächsten 2,3 Stunden 
+und Notitzen für später ( der große Plan) 
 
