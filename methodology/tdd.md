@@ -170,3 +170,19 @@ Es kann immer sein, dass mir etwas beim Entwicklen auffällt oder zwischendrin i
 Das muss verhindert werden, indem 2 Notitzen geführt werden. Notitzen für das jetzt also vllt für die nächsten 2,3 Stunden 
 und Notitzen für später ( der große Plan) 
 
+### Teste zuerst
+Die Vorteile liegen vor allem in der Sicherheit und scope Dokumentation. Man weiß dadurch genau
+was das System kann und wie es zusammengesetzt ist.
+
+### Zuweisung zuerst
+Das ist wie bei einer Mehtode/Function, wenn man den return wert zuerst beschreibt.
+Man hat da den Vorteil, dass man direkt sich darum Gedanken macht, wie man das ganze mathematisch überprüfen soll.
+
+### Testdatensätze
+Es gibt unterschiedliche Testdatensätze. Das eine ist eine Art "Gerüst" für den Unittest.
+Damit kann man schnell z.B über Mocks die Funktionalität beweisen. Das, was aber für "echtheit" sorgt,
+ist es einen realistischen Testfall aufzubauen, mit echten Testdaten, unterschiedlichen Längen und Eingaben.
+
+### Beweisdaten
+Der Author schlägt vor sich selbst die Argumentation der Testfälle nachzuweisen,
+indem man den Test so baut, dass man den Mathematischen Beweis als dritter oder man selbst(in 10 jahren ...) gut nachvollziehen kann.
