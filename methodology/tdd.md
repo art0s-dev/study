@@ -186,3 +186,35 @@ ist es einen realistischen Testfall aufzubauen, mit echten Testdaten, unterschie
 ### Beweisdaten
 Der Author schlägt vor sich selbst die Argumentation der Testfälle nachzuweisen,
 indem man den Test so baut, dass man den Mathematischen Beweis als dritter oder man selbst(in 10 jahren ...) gut nachvollziehen kann.
+
+## Red Bar Patterns
+
+### One step 
+Der Author schlägt vor stets von "Knowing" zu "Unknowing" zu gehen. Damit wird klar, was bewusst ist.
+Ich mache das ja schon automatisch, wenn ich weiß "achja funktion X hat besonders viel Funktionalität, also drücke ich mich davor". 
+
+### Starter Tests
+Schreibe Tests, die den schnellen Pfad zum Fehlschag garantieren zuerst. Bevor ich also die ganze Funktionalität implementiere kann ich genau so gut mit einem Nulltest anfangen oder mal bei Integern 0 abtesten. Somit mache ich mir zuerst über ein und Ausgabe Gedanken.
+
+### Explanation tests
+Schreibe Tests, die den Zusammenhang zwischen Eingabe und Ausgabe erkären.
+"Wenn ich Objekt X übergebe, und Einstellung XYZ getroffen wird, dann soll das Ergebnis so aussehen."
+
+### Learning Tests
+Beck schlägt vor wenn ich z.B eine Api Integriere ( Also third party services lohnen sich da wirklich für),
+sollte man vielleicht die Api mal über die Testsuite ausprobieren. Dadurch kann man A) feststellen ob die Api funktioniert und B) Wie die Api zu benutzen ist. Das ist auch eine gute Art der Dokumentation
+
+### Another Test
+Kurzum: Neue Ideen sind wertvoll, allerdings nicht immer direkt verfolgenswert. Schreibs erstmal auf und mach weiter mit dem,
+was du eigentlich wolltest.
+
+### Regression Test
+Dein Code ist Kaputt oder dir ist ein Defekt gemeldet worden? Dann musst du den Fehler Isolieren,
+die Bedingungen durch Code darstellen in einem Test, der die genauen Bedingungen einfängt und dann den Bug beheben.
+Erst so kannst du sicher sein, dass der Fehler auch wirklich weg ist. Wichtig hierbei ist, dass möglichst vollständige Informationen über die Betätigungen des Nutzers Informationen gesammelt werden (Log, GuiRecorder? )
+
+### Mach eine Pause
+Selbsterklärend. Der Author erwähnt noch, dass der auch länger gilt. Auch am WE mal was anderes zu machen, ist Gold Wert.
+
+  
+
