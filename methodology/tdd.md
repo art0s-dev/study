@@ -216,5 +216,49 @@ Erst so kannst du sicher sein, dass der Fehler auch wirklich weg ist. Wichtig hi
 ### Mach eine Pause
 Selbsterklärend. Der Author erwähnt noch, dass der auch länger gilt. Auch am WE mal was anderes zu machen, ist Gold Wert.
 
-  
+### Und nochmal!
+Ne ernsthaft, wenn man nicht weiterkommt, kann es helfen, das ganze nochmal zu machen.
+Einfach z.B beim Pair Programming mal den Partner wechseln oder oder oder....
+
+### Investiere in einen guten Bürostuhl und dergleichen
+Denn niemand kann gut programmieren, wenn sein Rücken wehtut. Außerdem
+seh zu, dass du ne gute Tastatur hast und generell gute Hardware.
+
+## Testing Patterns
+
+### Child Test
+Wenn der eigentliche Test zu groß ist, solltest du vielleicht 3 kleine draus machen.
+Eventuell den großen als Integrationstest laufen lassen.
+
+### Mocks
+Mocks an sich sind schon n echt komplexes thema. Jedes mal, wenn ich eine starke Abhängigkeit habe, sollte ich vielleicht dran denken nen mock zu benutzen.
+Das hab ich z.B im Hexenhammer schon gelernt. Einige Sachen werden einfach testbarer, wenn ich sie emuliere mit Mocks.
+(Außerdem habe ich so auch keine gemeinsamen Objekte und die Tests sind voneinander losgelöst)
+
+### Self Shunt
+Muss ich ehrlich sein, das habe ich nur marginal verstanden. Das was ich verstanden habe ist auf jeden fall, dass der
+Author empfiehlt, dass wenn ich z.B inferfaces teste, dass der Testcase sie selbst implementieren soll.
+
+### Log Strings
+Wenn ich z.B Asynchrones Verhalten implementiere also wenn ich was mit reaktiver Programmierung mache (Pub sub und so)
+dann kann ich sowieso am besten alles loggen. Also kann ich ja auch abtesten, welche logs wann geschmissen werden.
+
+### Crash Test Dummy
+Hast du dich schonmal gefragt wie man die bazillionen Catches in Java eigentlich abtesten kann?
+Die Antwort ist n einfacher crash test dummy, der garantiert eine Exception schmeißt.
+Also wenn du n mock objekt anlegst oder so und z.B Testen willst wie sich das System verhält wenn die 
+Festplatte voll ist kannst du doch eine der methoden einfach mal garantiert ne exception werfen lassen.
+((DAS IST SUUUUUPER GUT, SO KANN MAN DAS SYSTEM KNALLHART UND RESILIENT MACHEN!!!))
+
+### Clean Check in
+Bevor du den code committest: lass die tests nochmal durchlaufen und mach alles sauber und update deinen code nochmal.
+
+### Wo hab ich nochmal aufgehört?
+Wenn du den Arbeitsplatz verlässt, dann lass den letzten Test kaputt oder zumindest das, woran du grad arbeitest. 
+So weißt du ganz genau was du getestet hast und was du noch machen musst. (mach das aber um gottes willen nur lokal bei dir, sodass der
+nächste keinen kaputten code bekommt)
+
+## Green bar patterns
+
+### Fake it till you make it
 
