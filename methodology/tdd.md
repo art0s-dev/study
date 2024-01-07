@@ -261,4 +261,45 @@ nächste keinen kaputten code bekommt)
 ## Green bar patterns
 
 ### Fake it till you make it
+Der Author schlägt vor erstmal überall konstanten zu nehmen und dann die Konstanten auszutauschen "on the fly"
+also etwas implementieren mit ner konstante und sobald ich da nen anderen wert brauche, weil sich der testfall oder die anforderungen ändern tausche ich das
+ganze einfach aus.
 
+### Triangulation
+Ich bestimme das Verhalten des interfaces und Leite daraus die Implementierung ab. Also stelle ich mehrere Testfälle auf und sag "so und so muss sich der code verhalten".
+Wenn ich z.B 2 unterschiedliche Tests habe für eine klasse "Plus" Ja das Beispiel ist echt zu einfach... Und ich dann 2 Testfälle habe,
+dann kann ich daraus ableiten wie die Implementierung aussehen soll (Okay is total quatschig bei komplexeren geschichten) aber nevertheless kann ich 
+immer wieder zuerst das Interface definieren und dann das Verhalten darunter implementieren.
+
+## xUnit patterns
+
+### Assertion
+Alle Assertions evaluieren einen Boolschen Wert. Es gibt spezifische Methoden in einigen der Frameworks,
+sodass asssert True nicht abused werden muss. Also sowas wie assertEquals oder assertSame.
+
+#### Assert Equals
+Vor allem für Mathematische Operationen geeignet assertEquals(50, result)
+(erwarteterWert, ergebnis)
+
+#### Assert Same
+Vor allem für Objekte geeignet, (also da wird auch die Tiefe überprüft)
+Also kann man sowas machen assertSame(object1, object2);
+
+#### Conventions mit Fehlernachricht
+Viele Teams haben Konventionen, sodass eine Nachricht hinterlassen werden muss im Assert True oder generell allem,
+was einen Optionalen String als Parameter angibt. Warum? Damit man mehr Aussage über die Qualität des Werts bekommt, wenn doch noch
+was schiefgeht
+
+### Fixture
+es ist üblich in einer Setup methode den gemeinsamen Testcase zu beschreiben. Das macht man normalerweise in der @BeforeEach.
+- Auch ist es üblich in einem Teardown eine Datei zu schließen, wenn man sie in einem Test aufmacht (Also cleanup)
+
+### Test Methoden
+Die Mehtoden trennen durch Benennung den weizen von der Spreu. Wenn man eine halbwegs intelligente benennung der Testmethoden vornimmt, kann
+man durch den methodennamen schon aussagen, was erfolg oder misserfolg über den Code aussagt. Außerdem kann man dadurch feature dokumentation betreiben.
+
+### Exceptions testen
+Das einfachste ist es hierbei einfach den Code zu callen der werden soll. Gestalte den Testcode so, 
+dass er auf jeden fall wirft. Wenn die Exception nicht geworfen wird, hänge ein fail() hinter deinen Code im Test.
+So kannst du sicherstellen, dass der Test nur durchläuft wenn A) Dein geschriebener Code die exception wirft und B) Kann es nur funktionieren, 
+wenn die exception korrekt gehandhabt wird.
