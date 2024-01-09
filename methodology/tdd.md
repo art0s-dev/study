@@ -303,3 +303,104 @@ Das einfachste ist es hierbei einfach den Code zu callen der werden soll. Gestal
 dass er auf jeden fall wirft. Wenn die Exception nicht geworfen wird, hänge ein fail() hinter deinen Code im Test.
 So kannst du sicherstellen, dass der Test nur durchläuft wenn A) Dein geschriebener Code die exception wirft und B) Kann es nur funktionieren, 
 wenn die exception korrekt gehandhabt wird.
+
+## Design Patterns
+Die meisten Probleme die wir lösen, werden durch die tools verursacht die wir benutzen.
+OOP dient genau diese Probleme herunterzubrechen. Design Patterns sind eine Sammlung genau dieser häufigen Probleme
+
+### Command 
+Eine Berechnung oder ein Stück code, dass einfach ausgeführt werden soll (side effect meist)
+
+Is mehr so ne reactive programming Sache. Wir haben bei IKOffice z.B auch ne Client Server architektur, die sich aus einer Codebase ergibt. Da machen commands sinn, weil der client jederzeit command objekte erstellen kann und die zum server schicken kann.
+
+Das Java Runnable interface ist da das beste Beispiel.
+
+### Value Objekt 
+Ein Objekt, dass lediglich Werte enthält.
+BONUS: Wenn es immutable ist. Also z.B Records in Java. So kann ich Kompositionen mit Value Objekten schaffen, die mir alle nicht auf die Füße fallen.
+
+### Null Objects
+Der Name ist Irreführend. Der Author schlägt vor, statt überall Nullchecks einzubauen, einen Basecase einzuführen. Beck meint im Kontext von einem Rechtesystem z.B wäre es besser ein Default Objekt zu erschaffen, wo schon einige Infos drin sind, allerdings hald keine Nullen, damit das System weiterarbeiten kann und trotzdem klar is"hey das ding hier is noch nicht gesetzt"
+
+### Template method
+Eine Methode, die in einer Elternklasse aufgebaut wird und dann für die Kindklasse abgeleitet wird.
+
+### Pluggable Object
+im Prinzip Polymorphie der Objekte
+
+### Pluggable Selector 
+Im Prinzip meint der Author hier eine Kontrollstruktur wie einen Switch, der von außen z.B durch Construktor Injection gefüttert wird, und den weiteren Kontrollfluss bestimmt.
+
+### Factory Method
+Eine methode um Objekte drucken zu können.
+
+### Imposter 
+Eine neue Implementierung, die der Schnittstelle angepasst ist
+
+### Composite
+Ein Objekt, welches Verhalten einer bestimmten Gruppe von Objekten beschreibt.
+
+## Refactoring
+
+### Erkenne Unterschiede
+Wenn es darum geht 2 identische Codestücke (identisch im sinne vom Gleicher Auftrag, sehr ähnlich)
+dann bring die beiden nah aneinander. Woran unterscheiden Sie sich? Gib ihnen eine Gemeinsame Methode und versuch die Ausprägungen durch das Typensystem darzustellen.
+
+### Isoliere Änderungen
+Wenn ich ein großes Stück Code ändern will, sollte ich mir den Part zuerst heraussuchen, der verantwortlich ist für das was ich haben will. Dann extrahiere ich z.B eine eigene Methode daraus und benenne die Methode nach dem Schematischen Schnitt den ich gemacht hab. (Meistens is die methode dann privat)
+
+### Migrate Data
+Muss ich ehrlich sein, hab ich nicht ganz verstanden, warum das sinnvoll ist.
+Ich mein Beck beschreibt ja wenn ich z.B eine Datenstruktur von einem einfachen Objekt auf Liste ändern will, dann sollte ich beide Implementierungen erst mitnehmen und dann die alte löschen aber mir fällt einfach kein Anwendungsfall an, andem das erwähnenswert wäre.
+
+### Extract method
+Große Methoden aufsplitten. Es geht darum grade große Kandidaten (wie z.B einer der alten revisionen des Hexenhammers) die Komplexität durch sinnvolles divide and conquer zu verringern.
+Absolut notwending.
+
+### Inline Method
+Eine OOP Methode reconsidern. Also grade WEM oder welcher Entity die Methode gehört wird hier considered.
+
+### Extract Interface
+Wird vor allem Genutzt, um wie vorhin erwähnt code duplikate zu vermeiden und nur die unterschiede zu betonen.
+
+### Method Object
+Wie kann mein eine Komplizierte Berechnung am besten darstellen?
+Mach ne klasse draus! Die Abhängigkeiten werden so zu parametern.
+Mach wie bei der Runnable ne "handle" methode also sowas wie run(), damit 
+der Nutzer dann auch hinterher was damit anfangen kann und starte da die berechnung und splitte die ganze methode angenehm weiter auf.
+
+## TDD meistern
+Erstmal kleine Schritte. Führt am ehesten zum Erfolg und Üben, Üben, Üben.
+Nutze die Features deiner IDE und lerne deinen Editor. So kannst ich die refacotrings fast im Schlaf anwenden und es sind dann keine großen Umbauten sondern "zack zack alles".
+
+### Wie weiß ich denn wie ich gute Tests habe
+na wie sehen denn schlechte tests aus?
+- Viel zu lange Setups
+- Setup Duplikate (Jede methode setzt das gleiche auf)
+- Tests die viel zu lange dauern, als das man sie laufen lässt
+- Tests die einmal Funktionieren (ohne Änderunge) und dann wieder nicht
+
+### Wie führt TDD zu bestimmten Frameworks
+Wenn du anfängst Dinge zu abstrahieren. Wenn du deine Designs revisitest, passiert das automatisch.
+
+### Wie viele Tests muss ich denn schreiben?
+Wie gering ist deine mean time between failure? Also wie hart ist bei dir die Hütte am brennen, wenn der Code nicht funktioniert und eine failure verursacht und wann kommt der nächste Fehler?
+
+### Wann sollten tests gelöscht werden?
+Wenn es wirklich straight up duplikate sind mit gleichen Eingabe und Ausgabeparametern und vor allem, wenn sie innerhalb der gleichen Äquivalenzklasse den gleichen Pfad testen.
+
+### Wie beeinflusst die Programmiersprache und die IDE den Workflow
+Ja. Ich hab ja schonmal n paarmal scheme in nem plain editor geschrieben. Das sind welten unterschied.
+Also schau, dass deine Entwicklungsumgebung (Egal ob plain Editor oder IDE) einfach die bestmöglichsten Tools hat für deinen Workflow.
+
+### Kann man TDD durchführen mit RIESIGEN Systemen?
+Ja. Separiere einfach die Integrationstests (am besten eigener Testserver) von den Unittests (Lokal) und du bist pfeilschnell unterwegs.
+
+### Kann man TDD auch mit Acceptance Tests machen?
+Nur wenn den Kunde onsite ist, sonst macht das keinen Sinn.
+Du brauchst zur abnahme ja den Kunden.
+
+### Kann man Mittendrin in nem Legacysystem anfangen mit TDD?
+Ja aber mach das erstmal nur bei neuen Features only. Man kann schritt für schritt den alten Service immernoch refaktorieren, aber das macht keinen Sinn direkt alles umzukrempeln.
+
+
