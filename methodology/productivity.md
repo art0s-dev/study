@@ -30,10 +30,13 @@ Es kann da auch wohl was dran sein, aber für den Sinn der These "let me cook"
 
 Hast du dir so einen Guru mal angehört, kurz pausiert, dir eine Aussage nochmal angehört und 
 dich gefragt: "macht das für das JETZT sinn?" Also für deine Situation, für dein Projekt, das woran du arbeitest?
-Wenn die Antwort ja ist, will ich das gerne wissen :D
 
 Meiner Erfahrung nach schallt es oft "aaaach du musst das so und so machen" und "nur wenn du das und das verwendest, dann wird das auch gut"
 - Hört sich an wie der klassische verkäufer oder?
+
+Aber was ist mit den 3 Leuten, die _Nicht_ die prominente Meinung vertreten.
+Man nehme alleine das Moderne Beispiel des Spieleentwicklers Casey Muratori mit
+dem Video Clean Code, Bad Performance.
 
 ### "Kaputtes" Werkzeug
 Jetbrains IDE und Indexierung, VSCode, wenn ein Plugin geupdated wird und Eclipse wenn die Build Pipeline voll ist und der Editor blockiert.
