@@ -101,3 +101,40 @@ daher zusammengelegt werden
 I vor nem Interface ist ein warcrime. 
 Impl als Implementierung von nem Interface auch. 
 Der Name des Interfaces sollte ja eigentlich beschreiben, was das Interface ist.
+
+### Klassennamen
+Keine Verben. Manager, Info, Data , Processor sind no Go weil sie nicht klar sind.
+
+### Methodennamen
+Möglichst nur Verben. Als Präfix sind get / set und is erlaubt
+Keine Quatschnamen (weil nur du das liest). Beschreibe was es macht.
+
+### Keine Doppelten Konzepte
+Wenn du eine Controller und eine Manager und eine Driver Klasse hast - wo ist der unterschied zwischen denen?
+
+### Benutze das gleiche Wort für die gleiche Operation
+Wenn du eine Methode hast die add heißt und eine methode die insert heißt gehe ich davon aus,
+dass sie 2 unterschiedliche dinge tun.
+
+### Benutze Technische Namen
+Wenn du z.B Design Patterns verwendetst Nenne doch dann einfach die Klasse AccountVisitor oder so.
+So erkennt jedenfalls derjenige der es liest, dass es sich hier um das Visitorpattern handelt und 
+kann die klasse besser "scannen" beim lesen
+
+### Benutze Namen aus der Domäne
+Wenn der Vorgang den du benutzt in der Domäne einen bestimmten Namen hat (Fakturieren z.B)
+dann nenn es auch so. Damit können die Leser das besser verstehen, wenn Sie Domänenwissen haben.
+(Im besten Fall schreibst du nen Schnittstellenkommentar mit der Verlinkung zu einem Artikel was gemeint ist)
+
+### Gebe Kontext
+Du kannst Lokale Variablen verlängern, indem du klar machst zu WAS die variablen gehören.
+Also z.B bei dem Beispiel adresse addressFirstName -> Besser als nur ein wildes first name, weil
+du so die namen gruppieren kannst. Noch besser ist es an der Stelle ein Record zu haben, dann kann man sich das Adress davor gleich schenken.
+
+## Funktionen
+
+### Sollten klein sein.
+Wenn du Funktionen klein hälst, gruppierst und auf high level ebene benennst, kannst du die intention der Funktion
+besser ausdrücken und sie wird so leichter zu lesen. Versuch es so klein es geht zu halten.
+
+
